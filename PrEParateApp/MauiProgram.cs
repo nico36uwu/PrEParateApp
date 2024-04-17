@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Supabase;
 
 namespace PrEParateApp
 {
@@ -14,7 +15,7 @@ namespace PrEParateApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
+            //Client.Initialize(null,null);
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
