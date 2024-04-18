@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Supabase;
 using CommunityToolkit.Maui;
+using PrEParateApp.Model;
 
 namespace PrEParateApp;
 
@@ -21,6 +22,17 @@ public static class MauiProgram
             });
 
         // Continue initializing your .NET MAUI App here
+
+        //Supabase Config
+        builder.Services.AddSingleton(provider => new Supabase.Client(AppConfig.SUPABASE_URL, AppConfig.SUPABASE_KEY));
+
+        //View
+
+
+        //ViewModel
+
+
+        //Services
 
 
         return builder.Build();

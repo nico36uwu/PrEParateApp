@@ -5,6 +5,15 @@
         public AppShell()
         {
             InitializeComponent();
+
+            RegisterForRoute<MainPage>();
+
+
+        }
+
+        protected void RegisterForRoute<T>()
+        {
+            Routing.RegisterRoute(typeof(T).Name, typeof(T));
         }
     }
 }
