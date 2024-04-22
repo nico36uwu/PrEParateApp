@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using Supabase;
 using CommunityToolkit.Maui;
+using PrEParateApp.View;
 using PrEParateApp.Model;
+using PrEParateApp.ViewModel;
 
 namespace PrEParateApp;
 
@@ -27,13 +29,25 @@ public static class MauiProgram
         builder.Services.AddSingleton(provider => new Supabase.Client(AppConfig.SUPABASE_URL, AppConfig.SUPABASE_KEY));
 
         //View
-
+        builder.Services.AddTransient<MainPageView>();
+        builder.Services.AddTransient<ChatView>();
+        builder.Services.AddTransient<AgendaPersonalView>();
+        builder.Services.AddTransient<CalendarioView>();
+        builder.Services.AddTransient<CuestionarioView>();
+        builder.Services.AddTransient<PerfilUsuarioView>();
 
         //ViewModel
-
+        builder.Services.AddTransient<ChatVM>();
+        builder.Services.AddTransient<AgendaPersonalVM>();
+        builder.Services.AddTransient<CalendarioVM>();
+        builder.Services.AddTransient<CuestionarioVM>();
+        builder.Services.AddTransient<PerfilUsuarioVM>();
 
         //Services
-
+        builder.Services.AddSingleton<UsuarioRepository>();
+        builder.Services.AddSingleton<MedicoRepository>();
+        builder.Services.AddSingleton<ChatRepository>();
+        builder.Services.AddSingleton<MensajeRepository>();
 
         return builder.Build();
     }

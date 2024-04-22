@@ -65,4 +65,43 @@
 		<PackageReference Include="supabase-csharp" Version="0.16.2" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="View\AgendaPersonalView.xaml.cs">
+	    <DependentUpon>AgendaPersonalView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\CalendarioView.xaml.cs">
+	    <DependentUpon>CalendarioView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\ChatView.xaml.cs">
+	    <DependentUpon>ChatView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\CuestionarioView.xaml.cs">
+	    <DependentUpon>CuestionarioView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\MainPageView.xaml.cs">
+	    <DependentUpon>MainPageView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\PerfilUsuarioView.xaml.cs">
+	    <DependentUpon>PerfilUsuarioView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="View\AgendaPersonalView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\CalendarioView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\ChatView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\CuestionarioView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\PerfilUsuarioView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

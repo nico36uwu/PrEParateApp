@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:PrEParateApp.View"
+       xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+       x:Class="PrEParateApp.View.MainPageView"
+       Shell.NavBarIsVisible="False"
+       Shell.TabBarBackgroundColor="Black"
+       Shell.TabBarTitleColor="Yellow"
+       Shell.TabBarUnselectedColor="White">
+
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="White" StatusBarStyle="DarkContent" />
+    </Shell.Behaviors>
+    <TabBar>
+        
+        <!--Aquí para la pestaña en la que trabajeis cambiad la ruta del DataTemplate, así cargará la página, y poned un icono-->
+        <ShellContent Icon="chat"
+                      ContentTemplate="{DataTemplate views:ChatView}"/>
+        
+        <ShellContent Icon="agenda"
+                      ContentTemplate="{DataTemplate views:AgendaPersonalView}" />
+        
+        <ShellContent Icon="calendario"
+                      ContentTemplate="{DataTemplate views:CalendarioView}" />
+        
+        <ShellContent Icon="cuestionario"
+                      ContentTemplate="{DataTemplate views:CuestionarioView}" />
+
+        <ShellContent Icon="perfil"
+                      ContentTemplate="{DataTemplate views:PerfilUsuarioView}" />
+        
+    </TabBar>
+</Shell>

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrEParateApp.Service
+namespace PrEParateApp.ViewModel
 {
-    internal class Se
+    internal class CalendarioVM
     {
     }
 }

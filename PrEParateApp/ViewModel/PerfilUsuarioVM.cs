@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrEParateApp.Utilities
+namespace PrEParateApp.ViewModel
 {
-    internal class Ut
+    internal class PerfilUsuarioVM
     {
     }
 }
