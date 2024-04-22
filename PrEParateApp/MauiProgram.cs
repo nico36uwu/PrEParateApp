@@ -35,6 +35,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CalendarioView>();
         builder.Services.AddTransient<CuestionarioView>();
         builder.Services.AddTransient<PerfilUsuarioView>();
+        builder.Services.AddTransient<LoginView>();
 
         //ViewModel
         builder.Services.AddTransient<ChatVM>();
@@ -42,6 +43,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CalendarioVM>();
         builder.Services.AddTransient<CuestionarioVM>();
         builder.Services.AddTransient<PerfilUsuarioVM>();
+        builder.Services.AddTransient<LoginVM>();
 
         //Services
         builder.Services.AddSingleton<UsuarioRepository>();

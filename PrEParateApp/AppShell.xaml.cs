@@ -1,4 +1,6 @@
-﻿namespace PrEParateApp
+﻿using PrEParateApp.View;
+
+namespace PrEParateApp
 {
     public partial class AppShell : Shell
     {

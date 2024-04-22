@@ -1,4 +1,5 @@
 ﻿using PrEParateApp.View;
+using PrEParateApp.ViewModel;
 
 namespace PrEParateApp
 {
@@ -8,7 +9,9 @@ namespace PrEParateApp
         {
             InitializeComponent();
             RegisterRoutes();
-            MainPage = new View.MainPageView();
+            //LoginVM vm = new LoginVM();
+            //MainPage = new LoginView(vm);
+            MainPage = new MainPageView();
         }
 
         private void RegisterRoutes()

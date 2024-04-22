@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Maui.Core.Platform;
 using PrEParateApp.View;
 
-namespace PrEParateApp
+namespace PrEParateApp.View
 {
     public partial class MainPageView : Shell
     {
