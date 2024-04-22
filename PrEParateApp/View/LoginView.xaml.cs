@@ -9,4 +9,6 @@ public partial class LoginView : ContentPage
 		InitializeComponent();
 		BindingContext = l;
 	}
+
+
 }
