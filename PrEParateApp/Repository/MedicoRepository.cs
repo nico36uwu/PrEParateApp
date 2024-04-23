@@ -38,4 +38,10 @@ public class MedicoRepository
         var response = await _supabaseClient.From<Medico>().Get();
         return response.Models.OrderByDescending(b => b.DNI);
     }
+
+    internal async Task<Medico> FindByUserID(int medicoID)
+    {
+        var response = await _supabaseClient.From<Medico>().Where(b => b.ID == medicoID).Get();
+        return response.Model;
+    }
 }

@@ -9,9 +9,12 @@ namespace PrEParateApp.ViewModel
 {
     public partial class LoginVM : ObservableObject
     {
-        private UsuarioRepository _usuarioRepository;
+
         private string _dni;
         private string _password;
+
+        private AuthenticationService _authService;
+
 
         public string Dni
         {
@@ -27,10 +30,10 @@ namespace PrEParateApp.ViewModel
 
         public LoginVM() { }
 
-        public LoginVM(UsuarioRepository usuarioRepository)
+        public LoginVM(AuthenticationService authService)
             : this()
         {
-            _usuarioRepository = usuarioRepository;
+            _authService = authService;
         }
 
         [RelayCommand]
@@ -38,17 +41,16 @@ namespace PrEParateApp.ViewModel
         {
             try
             {
-                // Aquí puedes añadir la lógica para verificar el DNI y la contraseña del usuario
-                var user = await _usuarioRepository.FindByDniAndPassword(Dni, Password);
-                if (user != null)
+                bool isSuccess = await _authService.Login(Dni, Password);
+                if (isSuccess)
                 {
-                    // Implementar la lógica de navegación o mostrar un mensaje de éxito
+                    // Navegar a la página principal
                     Console.WriteLine("Inicio de sesión exitoso.");
                     Application.Current.MainPage = new MainPageView();
                 }
                 else
                 {
-                    // Manejar el caso de credenciales incorrectas
+                    // Mostrar mensaje de error
                     Console.WriteLine("Credenciales incorrectas.");
                 }
             }

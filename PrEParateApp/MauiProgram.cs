@@ -9,6 +9,8 @@ namespace PrEParateApp;
 
 public static class MauiProgram
 {
+    public static MauiApp App { get; private set; }
+
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
@@ -50,7 +52,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<MedicoRepository>();
         builder.Services.AddSingleton<ChatRepository>();
         builder.Services.AddSingleton<MensajeRepository>();
+        builder.Services.AddSingleton<AuthenticationService>();
 
-        return builder.Build();
+        App = builder.Build();
+        return App;
     }
 }

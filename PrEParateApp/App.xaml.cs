@@ -1,19 +1,21 @@
 ﻿using PrEParateApp.Model;
 using PrEParateApp.View;
 using PrEParateApp.ViewModel;
+using Microsoft.Extensions.DependencyInjection;  // Importar para usar GetRequiredService
 
 namespace PrEParateApp
 {
     public partial class App : Application
     {
+        private IServiceProvider Services => MauiProgram.App.Services;
+
         public App()
         {
             InitializeComponent();
             RegisterRoutes();
-            UsuarioRepository usuarioRepository = new UsuarioRepository(new Supabase.Client(AppConfig.SUPABASE_URL, AppConfig.SUPABASE_KEY));
-            LoginVM vm = new LoginVM(usuarioRepository);
-            MainPage = new LoginView(vm);
-            //MainPage = new MainPageView();
+
+            // Configurar la página principal usando DI
+            MainPage = Services.GetService<LoginView>();
         }
 
         private void RegisterRoutes()
@@ -31,6 +33,7 @@ namespace PrEParateApp
             catch (Exception e)
             {
                 // Manejar la excepción de manera adecuada, por ejemplo, registrarla o mostrar un mensaje de error.
+                Console.WriteLine($"Error al registrar rutas: {e.Message}");
             }
         }
     }
