@@ -2,11 +2,46 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PrEParateApp.View.PerfilUsuarioView"
-             Title="PerfilUsuario">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Perfil del Usuario">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="25">
+            <!-- Imagen de perfil -->
+            <Frame BackgroundColor="LightGray" HeightRequest="120" WidthRequest="120" CornerRadius="60" HorizontalOptions="Center">
+                <Image Source="{Binding ImagenPerfilUrl}" Aspect="AspectFill"/>
+            </Frame>
+
+            <Button Text="Editar Imagen" Command="{Binding SeleccionarYSubirImagenCommand}"  HorizontalOptions="Center"/>
+
+            <!-- Datos del usuario -->
+            <StackLayout>
+                <Label Text="MEDICO" 
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding Medico.Nombre}" />
+
+                <Label Text="DNI" 
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding Usuario.DNI}" />
+
+                <Label Text="Nombre y Apellidos" 
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding Usuario.Nombre}" />
+
+                <Label Text="Fecha de Nacimiento" 
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding FechaNacimientoFormateada}" />
+
+                <Label Text="Número de la Seguridad Social" 
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding Usuario.NumeroSS}" />
+
+                <Label Text="Número de la Tarjeta Sanitaria" 
+                       FontAttributes="Bold"/>
+                <Label Text="{Binding Usuario.NumeroSIP}" />
+            </StackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+    <!-- Aquí iría el código para el TabBar si lo tienes como un recurso reutilizable -->
 </ContentPage>

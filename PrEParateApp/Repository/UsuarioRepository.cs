@@ -50,4 +50,34 @@ public class UsuarioRepository
         var response = await _supabaseClient.From<Usuario>().Where(b => b.DNI == dni && b.Password == password).Get();
         return response.Model;
     }
+
+    public async Task<string> SubirImagenPerfilAsync(Stream imageData, string fileName)
+    {
+        var uniqueFileName = $"{Guid.NewGuid()}_{fileName}";
+        var bucket = "perfiles"; // Reemplaza con el nombre de tu bucket
+
+        using var memoryStream = new MemoryStream();
+        imageData.CopyTo(memoryStream);
+        byte[] imageBytes = memoryStream.ToArray();
+
+        var response = await _supabaseClient.Storage.From(bucket).Upload(imageBytes, uniqueFileName);
+
+        if (response != null)
+        {
+            var publicUrl = _supabaseClient.Storage.From(bucket).GetPublicUrl(uniqueFileName);
+            return publicUrl;
+        }
+        else
+        {
+            // Manejo de errores
+            return null;
+        }
+    }
+
+    public async Task ActualizarImagen(Usuario usuario)
+    {
+        await _supabaseClient.From<Usuario>().Where(b => b.DNI == usuario.DNI)
+            .Set(b => b.ImagenURL, usuario.ImagenURL)
+            .Update();
+    }
 }
