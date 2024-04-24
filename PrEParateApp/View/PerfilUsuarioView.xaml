@@ -7,37 +7,67 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="25">
             <!-- Imagen de perfil -->
-            <Frame BackgroundColor="LightGray" HeightRequest="120" WidthRequest="120" CornerRadius="60" HorizontalOptions="Center">
-                <Image Source="{Binding ImagenPerfilUrl}" Aspect="AspectFill"/>
+            <Frame BackgroundColor="LightGray" HeightRequest="150" WidthRequest="150" CornerRadius="75" HorizontalOptions="Center" VerticalOptions="Center" Padding="3">
+                <Image Source="{Binding ImagenPerfilUrl}" Aspect="AspectFill" HeightRequest="144" WidthRequest="144" />
             </Frame>
 
-            <Button Text="Editar Imagen" Command="{Binding SeleccionarYSubirImagenCommand}"  HorizontalOptions="Center"/>
+            <Button Text="Editar Imagen" Command="{Binding SeleccionarYSubirImagenCommand}" HorizontalOptions="Center" Margin="0,10,0,10"/>
 
             <!-- Datos del usuario -->
-            <StackLayout>
+            <StackLayout Spacing="7">
                 <Label Text="MEDICO" 
-                       FontAttributes="Bold"/>
-                <Label Text="{Binding Medico.Nombre}" />
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="{Binding Medico.Nombre}" 
+                       FontSize="Medium"
+                       HorizontalOptions="Center"/>
 
                 <Label Text="DNI" 
-                       FontAttributes="Bold"/>
-                <Label Text="{Binding Usuario.DNI}" />
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="{Binding Usuario.DNI}" 
+                       FontSize="Medium"
+                       HorizontalOptions="Center"/>
 
                 <Label Text="Nombre y Apellidos" 
-                       FontAttributes="Bold"/>
-                <Label Text="{Binding Usuario.Nombre}" />
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="{Binding Usuario.Nombre}" 
+                       FontSize="Medium"
+                       HorizontalOptions="Center"/>
 
                 <Label Text="Fecha de Nacimiento" 
-                       FontAttributes="Bold"/>
-                <Label Text="{Binding FechaNacimientoFormateada}" />
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="{Binding FechaNacimientoFormateada}" 
+                       FontSize="Medium"
+                       HorizontalOptions="Center"/>
 
                 <Label Text="Número de la Seguridad Social" 
-                       FontAttributes="Bold"/>
-                <Label Text="{Binding Usuario.NumeroSS}" />
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="{Binding Usuario.NumeroSS}" 
+                       FontSize="Medium"
+                       HorizontalOptions="Center"/>
 
                 <Label Text="Número de la Tarjeta Sanitaria" 
-                       FontAttributes="Bold"/>
-                <Label Text="{Binding Usuario.NumeroSIP}" />
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="{Binding Usuario.NumeroSIP}" 
+                       FontSize="Medium"
+                       HorizontalOptions="Center"/>
             </StackLayout>
 
         </VerticalStackLayout>
