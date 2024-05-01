@@ -40,4 +40,10 @@ public class MensajeRepository
         var response = await _supabaseClient.From<Mensaje>().Get();
         return response.Models.OrderByDescending(b => b.Fecha);
     }
+
+    public async Task<IEnumerable<Mensaje>> GetMensajesChat(int chatID)
+    {
+        var response = await _supabaseClient.From<Mensaje>().Where(b => b.ChatId == chatID).Get();
+        return response.Models.OrderBy(b => b.Fecha);
+    }
 }

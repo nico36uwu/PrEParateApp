@@ -3,6 +3,7 @@ using Postgrest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,9 @@ namespace PrEParateApp.Model
 
         [Column("AUTOR_USUARIO")]
         public int? AutorUsuarioId { get; set; }
+
+        [IgnoreDataMember]
+        public bool EsDeUsuario { get; set; }
 
         public Mensaje() { }
 

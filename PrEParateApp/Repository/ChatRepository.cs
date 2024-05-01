@@ -38,4 +38,10 @@ public class ChatRepository
         var response = await _supabaseClient.From<Chat>().Get();
         return response.Models.OrderByDescending(b => b.ID);
     }
+
+    public async Task<Chat> FindByUserID(int usuarioID)
+    {
+        var response = await _supabaseClient.From<Chat>().Where(b => b.ID == usuarioID).Get();
+        return response.Model;
+    }
 }
