@@ -14,7 +14,7 @@ namespace PrEParateApp.ViewModel
         private AuthenticationService _authService;
         private UsuarioRepository _usuarioRepository;
 
-        public string FechaNacimientoFormateada => Usuario?.FechaNacimiento.ToString("d");
+        public string FechaNacimientoFormateada => Usuario?.FechaNacimiento.ToString("dd/MM/yyyy");
         public string ImagenPerfilUrl => Usuario.ImagenURL ?? "perfil_imagen.png";
 
         private Usuario _usuario;
