@@ -2,11 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PrEParateApp.Utilities"
              x:Class="PrEParateApp.View.ChatView"
-             Title="Chat">
+             Title="Chat"
+             BackgroundColor="#F5EFEF">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:BooleanToLayoutOptionsConverter x:Key="BooleanToLayoutOptionsConverter"/>
+            <local:BooleanToColorConverter x:Key="BooleanToColorConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -16,18 +18,35 @@
             <CollectionView ItemsSource="{Binding Mensajes}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Padding="10" HorizontalOptions="{Binding EsDeUsuario, Converter={StaticResource BooleanToLayoutOptionsConverter}}">
-                            <Label Text="{Binding Texto}" FontSize="Medium"/>
-                            <Label Text="{Binding Fecha, StringFormat='{0:G}'}" FontSize="Small" HorizontalOptions="End"/>
-                        </StackLayout>
+                        <Grid Padding="10" HorizontalOptions="{Binding EsDeUsuario, Converter={StaticResource BooleanToLayoutOptionsConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Frame CornerRadius="15" BackgroundColor="{Binding EsDeUsuario, Converter={StaticResource BooleanToColorConverter}}">
+                                <StackLayout Grid.Column="{Binding EsDeUsuario, Converter={StaticResource BooleanToLayoutOptionsConverter}}"
+                                             BackgroundColor="{Binding EsDeUsuario, Converter={StaticResource BooleanToColorConverter}}"
+                                             Margin="{Binding EsDeUsuario, Converter={StaticResource BooleanToLayoutOptionsConverter}, ConverterParameter='Margin'}"
+                                             >
+                                    <Label Text="{Binding Texto}" FontSize="Medium" TextColor="White"/>
+                                    <Label Text="{Binding Fecha, StringFormat='{0:G}'}" FontSize="Small" HorizontalOptions="End" TextColor="Gray"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
                     </DataTemplate>
+
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
 
-        <StackLayout Grid.Row="1" Orientation="Horizontal" Padding="10">
-            <Entry Text="{Binding TextoMensaje, Mode=TwoWay}" Placeholder="Escribe un mensaje..." HorizontalOptions="FillAndExpand"/>
-            <Button Text="Enviar" Command="{Binding EnviarMensajeCommand}" Margin="5,0"/>
+        <StackLayout Grid.Row="1" Orientation="Horizontal" Padding="10" BackgroundColor="#F5EFEF">
+            <Frame CornerRadius="20" Padding="0" HorizontalOptions="FillAndExpand" BackgroundColor="White" HasShadow="False">
+                <Entry Text="{Binding TextoMensaje, Mode=TwoWay}" 
+               Placeholder="Escribe un mensaje..."
+               BackgroundColor="Transparent"/>
+            </Frame>
+            <Button Text="Enviar" Command="{Binding EnviarMensajeCommand}" Margin="5,0" BackgroundColor="Red"/>
         </StackLayout>
+
     </Grid>
 </ContentPage>

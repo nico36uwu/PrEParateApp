@@ -11,7 +11,7 @@
                 <Image Source="{Binding ImagenPerfilUrl}" Aspect="AspectFill" HeightRequest="144" WidthRequest="144" />
             </Frame>
 
-            <Button Text="Editar Imagen" Command="{Binding SeleccionarYSubirImagenCommand}" HorizontalOptions="Center" Margin="0,0,0,30"/>
+            <Button Text="Editar Imagen" Command="{Binding SeleccionarYSubirImagenCommand}" HorizontalOptions="Center" Margin="0,0,0,30" BackgroundColor="Red"/>
 
             <!-- Datos del usuario -->
             <StackLayout Spacing="7">

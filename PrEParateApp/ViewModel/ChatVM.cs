@@ -35,6 +35,7 @@ namespace PrEParateApp.ViewModel
                     Fecha = DateTime.UtcNow,
                     ChatId = _authenticationService.ChatUsario.ID,
                     AutorUsuarioId = _authenticationService.UsuarioConectado.ID,
+                    EsDeUsuario = true,
                 };
 
                 await _mensajeRepository.Insertar(nuevoMensaje);

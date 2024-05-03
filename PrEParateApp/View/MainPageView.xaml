@@ -5,9 +5,10 @@
        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
        x:Class="PrEParateApp.View.MainPageView"
        Shell.NavBarIsVisible="False"
-       Shell.TabBarBackgroundColor="Black"
-       Shell.TabBarTitleColor="Yellow"
-       Shell.TabBarUnselectedColor="White">
+       TabBarBackgroundColor="#FF0000"
+       TabBarForegroundColor="White"
+       TabBarTitleColor="White"
+       TabBarUnselectedColor="Gray">
 
     <Shell.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="White" StatusBarStyle="DarkContent" />
