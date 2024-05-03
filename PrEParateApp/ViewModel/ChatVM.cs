@@ -32,7 +32,7 @@ namespace PrEParateApp.ViewModel
                 var nuevoMensaje = new Mensaje
                 {
                     Texto = TextoMensaje,
-                    Fecha = DateTime.UtcNow,
+                    Fecha = DateTime.Now,
                     ChatId = _authenticationService.ChatUsario.ID,
                     AutorUsuarioId = _authenticationService.UsuarioConectado.ID,
                     EsDeUsuario = true,

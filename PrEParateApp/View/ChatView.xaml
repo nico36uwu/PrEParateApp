@@ -23,13 +23,13 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Frame CornerRadius="15" BackgroundColor="{Binding EsDeUsuario, Converter={StaticResource BooleanToColorConverter}}">
+                            <Frame CornerRadius="15" BackgroundColor="{Binding EsDeUsuario, Converter={StaticResource BooleanToColorConverter}}" WidthRequest="300">
                                 <StackLayout Grid.Column="{Binding EsDeUsuario, Converter={StaticResource BooleanToLayoutOptionsConverter}}"
                                              BackgroundColor="{Binding EsDeUsuario, Converter={StaticResource BooleanToColorConverter}}"
                                              Margin="{Binding EsDeUsuario, Converter={StaticResource BooleanToLayoutOptionsConverter}, ConverterParameter='Margin'}"
                                              >
                                     <Label Text="{Binding Texto}" FontSize="Medium" TextColor="White"/>
-                                    <Label Text="{Binding Fecha, StringFormat='{0:G}'}" FontSize="Small" HorizontalOptions="End" TextColor="Gray"/>
+                                    <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy   HH:mm}'}" FontSize="Small" HorizontalOptions="End" TextColor="Gray"/>
                                 </StackLayout>
                             </Frame>
                         </Grid>
