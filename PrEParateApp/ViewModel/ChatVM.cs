@@ -21,6 +21,7 @@ namespace PrEParateApp.ViewModel
         {
             _authenticationService = authenticationService;
             _mensajeRepository = mensajeRepository;
+            _mensajeRepository.OnMensajeInserted += MensajeRepository_OnMensajeInserted; // Suscribirse al evento
             LoadMensajes();
         }
 
@@ -48,6 +49,15 @@ namespace PrEParateApp.ViewModel
         {
             var mensajes = await _mensajeRepository.GetMensajesChat(_authenticationService.ChatUsario.ID);
             foreach (var mensaje in mensajes)
+            {
+                mensaje.EsDeUsuario = mensaje.AutorUsuarioId == _authenticationService.UsuarioConectado.ID;
+                Mensajes.Add(mensaje);
+            }
+        }
+
+        private void MensajeRepository_OnMensajeInserted(Mensaje mensaje)
+        {
+            if (mensaje.ChatId == _authenticationService.ChatUsario.ID)
             {
                 mensaje.EsDeUsuario = mensaje.AutorUsuarioId == _authenticationService.UsuarioConectado.ID;
                 Mensajes.Add(mensaje);
