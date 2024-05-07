@@ -40,20 +40,20 @@ namespace PrEParateApp.ViewModel
                 };
 
                 await _mensajeRepository.Insertar(nuevoMensaje);
-                Mensajes.Add(nuevoMensaje);
                 TextoMensaje = string.Empty;
             }
         }
 
         private async void LoadMensajes()
         {
+            await _mensajeRepository.InitializeAsync();
+
             var mensajes = await _mensajeRepository.GetMensajesChat(_authenticationService.ChatUsario.ID);
             foreach (var mensaje in mensajes)
             {
                 mensaje.EsDeUsuario = mensaje.AutorUsuarioId == _authenticationService.UsuarioConectado.ID;
                 Mensajes.Add(mensaje);
             }
-            await _mensajeRepository.InitializeAsync();
         }
 
         private void MensajeRepository_OnMensajeInserted(Mensaje mensaje)
