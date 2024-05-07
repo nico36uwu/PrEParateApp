@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using PrEParateApp.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PrEParateApp.ViewModel
@@ -15,13 +16,19 @@ namespace PrEParateApp.ViewModel
         [ObservableProperty]
         private string textoMensaje;
 
+        [ObservableProperty]
+        private string nombreMedico;
+
         public ObservableCollection<Mensaje> Mensajes { get; } = new ObservableCollection<Mensaje>();
+
+        public event Action? ScrollToMessage;
 
         public ChatVM(AuthenticationService authenticationService, MensajeRepository mensajeRepository)
         {
             _authenticationService = authenticationService;
             _mensajeRepository = mensajeRepository;
-            _mensajeRepository.OnMensajeInserted += MensajeRepository_OnMensajeInserted; // Suscribirse al evento
+            _mensajeRepository.OnMensajeInserted += MensajeRepository_OnMensajeInserted;
+            nombreMedico = _authenticationService.MedicoUsario.Nombre;
             LoadMensajes();
         }
 
@@ -41,6 +48,8 @@ namespace PrEParateApp.ViewModel
 
                 await _mensajeRepository.Insertar(nuevoMensaje);
                 TextoMensaje = string.Empty;
+
+                ScrollToMessage?.Invoke();
             }
         }
 
@@ -54,6 +63,8 @@ namespace PrEParateApp.ViewModel
                 mensaje.EsDeUsuario = mensaje.AutorUsuarioId == _authenticationService.UsuarioConectado.ID;
                 Mensajes.Add(mensaje);
             }
+
+            ScrollToMessage?.Invoke();
         }
 
         private void MensajeRepository_OnMensajeInserted(Mensaje mensaje)
@@ -62,8 +73,9 @@ namespace PrEParateApp.ViewModel
             {
                 mensaje.EsDeUsuario = mensaje.AutorUsuarioId == _authenticationService.UsuarioConectado.ID;
                 Mensajes.Add(mensaje);
+
+                ScrollToMessage?.Invoke();
             }
         }
     }
-
 }

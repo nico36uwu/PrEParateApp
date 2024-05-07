@@ -12,10 +12,12 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-
-    <Grid RowDefinitions="*, Auto">
-        <ScrollView Grid.Row="0">
-            <CollectionView ItemsSource="{Binding Mensajes}">
+    <Grid RowDefinitions="Auto, *, Auto">
+        <Frame Grid.Row="0" BackgroundColor="Red" CornerRadius="0" Padding="10" MaximumHeightRequest="50">
+            <Label Text="{Binding NombreMedico}" FontSize="Large" TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+        </Frame>
+        <ScrollView x:Name="MensajesScrollView" Grid.Row="1" VerticalScrollBarVisibility="Always">
+            <CollectionView x:Name="MensajesCollectionView" ItemsSource="{Binding Mensajes}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10" HorizontalOptions="{Binding EsDeUsuario, Converter={StaticResource BooleanToLayoutOptionsConverter}}">
@@ -26,24 +28,22 @@
                             <Frame CornerRadius="15" BackgroundColor="{Binding EsDeUsuario, Converter={StaticResource BooleanToColorConverter}}" WidthRequest="300">
                                 <StackLayout Grid.Column="{Binding EsDeUsuario, Converter={StaticResource BooleanToLayoutOptionsConverter}}"
                                              BackgroundColor="{Binding EsDeUsuario, Converter={StaticResource BooleanToColorConverter}}"
-                                             Margin="{Binding EsDeUsuario, Converter={StaticResource BooleanToLayoutOptionsConverter}, ConverterParameter='Margin'}"
-                                             >
+                                             Margin="{Binding EsDeUsuario, Converter={StaticResource BooleanToLayoutOptionsConverter}, ConverterParameter='Margin'}">
                                     <Label Text="{Binding Texto}" FontSize="Medium" TextColor="White"/>
                                     <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy   HH:mm}'}" FontSize="Small" HorizontalOptions="End" TextColor="Gray"/>
                                 </StackLayout>
                             </Frame>
                         </Grid>
                     </DataTemplate>
-
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
 
-        <StackLayout Grid.Row="1" Orientation="Horizontal" Padding="10" BackgroundColor="#F5EFEF">
+        <StackLayout Grid.Row="2" Orientation="Horizontal" Padding="10" BackgroundColor="#F5EFEF">
             <Frame CornerRadius="20" Padding="0" HorizontalOptions="FillAndExpand" BackgroundColor="White" HasShadow="False">
                 <Entry Text="{Binding TextoMensaje, Mode=TwoWay}" 
-               Placeholder="Escribe un mensaje..."
-               BackgroundColor="Transparent"/>
+                       Placeholder="Escribe un mensaje..."
+                       BackgroundColor="Transparent"/>
             </Frame>
             <Button Text="Enviar" Command="{Binding EnviarMensajeCommand}" Margin="5,0" BackgroundColor="Red"/>
         </StackLayout>
