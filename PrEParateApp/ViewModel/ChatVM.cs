@@ -53,6 +53,7 @@ namespace PrEParateApp.ViewModel
                 mensaje.EsDeUsuario = mensaje.AutorUsuarioId == _authenticationService.UsuarioConectado.ID;
                 Mensajes.Add(mensaje);
             }
+            await _mensajeRepository.InitializeAsync();
         }
 
         private void MensajeRepository_OnMensajeInserted(Mensaje mensaje)

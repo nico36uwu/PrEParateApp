@@ -1,39 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Supabase;
 using PrEParateApp.Model;
 using static Supabase.Realtime.PostgresChanges.PostgresChangesOptions;
-using System.Diagnostics;
+using Supabase.Realtime.PostgresChanges;
+using static Supabase.Realtime.Constants;
 
 public class MensajeRepository
 {
     private readonly Client _supabaseClient;
-    public event Action<Mensaje> OnMensajeInserted;
+    public event Action<Mensaje>? OnMensajeInserted;
 
     public MensajeRepository(Client client)
     {
         this._supabaseClient = client;
-        InitializeRealtimeListener();
     }
 
-    private void InitializeRealtimeListener()
+    public async Task InitializeAsync()
     {
-        _supabaseClient.From<Mensaje>()
-            .On(ListenType.Inserts, (sender, payload) =>
+        await EnsureConnectedAsync();
+        await InitializeRealtimeListenerAsync();
+    }
+
+    private async Task EnsureConnectedAsync()
+    {
+            await _supabaseClient.Realtime.ConnectAsync();
+    }
+
+    private async Task InitializeRealtimeListenerAsync()
+    {
+        var channel = _supabaseClient.Realtime.Channel("public-mensaje");
+        channel.Register(new PostgresChangesOptions("public", "mensaje"));
+        channel.AddPostgresChangeHandler(ListenType.All, (sender, change) =>
+        {
+            switch (change.Payload.Data.Type)
             {
-                try
-                {
-                    // Se asume que "Record" es el objeto convertido directamente al modelo
-                    var nuevoMensaje = payload.Payload.Data.Record.Response.ToString;
-                    //OnMensajeInserted?.Invoke(nuevoMensaje);
-                    Debug.WriteLine($"Nuevo mensaje insertado: {nuevoMensaje}");
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Error procesando el mensaje insertado: {ex.Message}");
-                }
-            });
+                case EventType.Insert:
+                    Mensaje? msg = change.Model<Mensaje>();
+                    OnMensajeInserted?.Invoke(msg);
+                    break;
+                case EventType.Update:
+                    // Mensaje actualizado
+                    break;
+                case EventType.Delete:
+                    // Mensaje eliminado
+                    break;
+            }
+        });
+
+        await channel.Subscribe();
     }
 
     public async Task Insertar(Mensaje mensaje)
@@ -48,7 +65,8 @@ public class MensajeRepository
 
     public async Task Actualizar(Mensaje mensaje)
     {
-        await _supabaseClient.From<Mensaje>().Where(b => b.ID == mensaje.ID)
+        await _supabaseClient.From<Mensaje>()
+            .Where(b => b.ID == mensaje.ID)
             .Set(b => b.Texto, mensaje.Texto)
             .Set(b => b.Fecha, mensaje.Fecha)
             .Set(b => b.ChatId, mensaje.ChatId)
