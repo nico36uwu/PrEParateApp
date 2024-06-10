@@ -75,6 +75,9 @@
 	  <Compile Update="View\ChatView.xaml.cs">
 	    <DependentUpon>ChatView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\RegisterView.xaml.cs">
+	    <DependentUpon>RegisterView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\CuestionarioView.xaml.cs">
 	    <DependentUpon>CuestionarioView.xaml</DependentUpon>
 	  </Compile>
@@ -94,6 +97,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\ChatView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\RegisterView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\CuestionarioView.xaml">

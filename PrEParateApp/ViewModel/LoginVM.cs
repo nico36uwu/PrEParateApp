@@ -60,5 +60,11 @@ namespace PrEParateApp.ViewModel
                 Console.WriteLine($"Error al iniciar sesión: {ex.Message}");
             }
         }
+
+        [RelayCommand]
+        public async void Register() 
+        {
+            Application.Current.MainPage = MauiProgram.App.Services.GetService<RegisterView>();
+        }
     }
 }

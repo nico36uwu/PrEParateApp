@@ -29,6 +29,7 @@ namespace PrEParateApp
                 Routing.RegisterRoute(nameof(CuestionarioView), typeof(CuestionarioView));
                 Routing.RegisterRoute(nameof(PerfilUsuarioView), typeof(PerfilUsuarioView));
                 Routing.RegisterRoute(nameof(LoginView), typeof(LoginView));
+                Routing.RegisterRoute(nameof(RegisterView), typeof(RegisterView));
             }
             catch (Exception e)
             {

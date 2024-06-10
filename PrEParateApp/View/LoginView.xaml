@@ -41,6 +41,11 @@
                 Command="{Binding LoginCommand}"
                 HorizontalOptions="Fill"/>
 
+            <Button
+                Text="Registrar Usuario"
+                Command="{Binding RegisterCommand}"
+                HorizontalOptions="Fill"/>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

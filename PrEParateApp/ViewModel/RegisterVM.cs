@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrEParateApp.ViewModel
 {
-    public partial class CuestionarioVM
+    public partial class RegisterVM
     {
 
     }
