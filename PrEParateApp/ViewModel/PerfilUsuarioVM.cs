@@ -42,36 +42,43 @@ namespace PrEParateApp.ViewModel
         [RelayCommand]
         public async Task SeleccionarYSubirImagen()
         {
-            var customFileType = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
+            try
+            {
+                var customFileType = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
             {
                 { DevicePlatform.iOS, new[] { "public.image" } }, // Ejemplo para iOS
                 { DevicePlatform.Android, new[] { "image/*" } } // Soporte para Android
                 // Agrega tipos de archivos para otras plataformas si es necesario
             });
 
-            var opciones = new PickOptions
-            {
-                PickerTitle = "Selecciona una imagen",
-                FileTypes = customFileType,
-            };
-
-            var resultado = await FilePicker.PickAsync(opciones);
-            if (resultado != null)
-            {
-                using var stream = await resultado.OpenReadAsync();
-                var urlImagen = await _usuarioRepository.SubirImagenPerfilAsync(stream, resultado.FileName);
-
-                if (!string.IsNullOrEmpty(urlImagen))
+                var opciones = new PickOptions
                 {
-                    // Actualiza la URL de la imagen del usuario conectado
-                    Usuario.ImagenURL = urlImagen;
+                    PickerTitle = "Selecciona una imagen",
+                    FileTypes = customFileType,
+                };
 
-                    // Guarda los cambios en la base de datos usando el repositorio
-                    await _usuarioRepository.ActualizarImagen(Usuario);
+                var resultado = await FilePicker.PickAsync(opciones);
+                if (resultado != null)
+                {
+                    using var stream = await resultado.OpenReadAsync();
+                    var urlImagen = await _usuarioRepository.SubirImagenPerfilAsync(stream, resultado.FileName);
 
-                    // Notifica a la vista que la propiedad ha cambiado para actualizar la UI
-                    OnPropertyChanged(nameof(ImagenPerfilUrl));
+                    if (!string.IsNullOrEmpty(urlImagen))
+                    {
+                        // Actualiza la URL de la imagen del usuario conectado
+                        Usuario.ImagenURL = urlImagen;
+
+                        // Guarda los cambios en la base de datos usando el repositorio
+                        await _usuarioRepository.ActualizarImagen(Usuario);
+
+                        // Notifica a la vista que la propiedad ha cambiado para actualizar la UI
+                        OnPropertyChanged(nameof(ImagenPerfilUrl));
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
         }
 

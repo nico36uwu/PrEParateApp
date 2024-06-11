@@ -41,7 +41,7 @@ public class ChatRepository
 
     public async Task<Chat> FindByUserID(int usuarioID)
     {
-        var response = await _supabaseClient.From<Chat>().Where(b => b.ID == usuarioID).Get();
+        var response = await _supabaseClient.From<Chat>().Where(b => b.UsuarioId == usuarioID).Get();
         return response.Model;
     }
 }

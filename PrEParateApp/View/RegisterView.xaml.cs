@@ -8,5 +8,6 @@ public partial class RegisterView : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = r;
-	}
+        datePicker.MaximumDate = DateTime.Today;
+    }
 }

@@ -3,6 +3,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PrEParateApp.Model;
+using PrEParateApp.Utilities;
 using PrEParateApp.View;
 
 namespace PrEParateApp.ViewModel
@@ -41,24 +42,34 @@ namespace PrEParateApp.ViewModel
         {
             try
             {
-                bool isSuccess = await _authService.Login(Dni, Password);
-                if (isSuccess)
+                string loginResult = await _authService.Login(Dni, Password);
+                switch (loginResult)
                 {
-                    // Navegar a la página principal
-                    Console.WriteLine("Inicio de sesión exitoso.");
-                    Application.Current.MainPage = new MainPageView();
-                }
-                else
-                {
-                    // Mostrar mensaje de error
-                    Console.WriteLine("Credenciales incorrectas.");
+                    case Constantes.ACEPTADO:
+                        // Navegar a la página principal
+                        Application.Current.MainPage = new MainPageView();
+                        break;
+                    case Constantes.PENDIENTE:
+                        await ShowErrorMessage("Su cuenta está pendiente de aprobación.");
+                        break;
+                    case Constantes.RECHAZADO:
+                        await ShowErrorMessage("Su cuenta ha sido rechazada.");
+                        break;
+                    default:
+                        await ShowErrorMessage("Credenciales incorrectas.");
+                        break;
                 }
             }
             catch (Exception ex)
             {
                 // Manejar cualquier excepción que pueda ocurrir durante el inicio de sesión
-                Console.WriteLine($"Error al iniciar sesión: {ex.Message}");
+                await ShowErrorMessage($"Error al iniciar sesión: {ex.Message}");
             }
+        }
+
+        private async Task ShowErrorMessage(string message)
+        {
+            await Application.Current.MainPage.DisplayAlert("Información", message, "OK");
         }
 
         [RelayCommand]

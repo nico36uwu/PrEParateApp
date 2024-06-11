@@ -45,6 +45,12 @@ public class UsuarioRepository
         return response.Models.OrderByDescending(b => b.DNI);
     }
 
+    public async Task<Usuario> GetById(Usuario user)
+    {
+        var response = await _supabaseClient.From<Usuario>().Where(b => b.ID == user.ID).Get();
+        return response.Model;
+    }
+
     public async Task<Usuario?> FindByDniAndPassword(string dni, string password)
     {
         var response = await _supabaseClient.From<Usuario>().Where(b => b.DNI == dni && b.Password == password).Get();

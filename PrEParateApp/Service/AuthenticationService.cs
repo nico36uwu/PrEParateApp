@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using PrEParateApp.Model;
+using PrEParateApp.Utilities;
 
 public class AuthenticationService
 {
@@ -25,16 +26,21 @@ public class AuthenticationService
         _chatRepository = chatRepository;
     }
 
-    public async Task<bool> Login(string dni, string password)
+    public async Task<string> Login(string dni, string password)
     {
         var user = await _usuarioRepository.FindByDniAndPassword(dni, password);
-        if (user != null) 
+        if (user != null)
         {
-            _usuarioConectado = user;
-            await AsignarMedicoUsuario();
-            await AsignarChatUsuario();
+            if (user.EstadoPaciente == Constantes.ACEPTADO)
+            {
+                _usuarioConectado = user;
+                await AsignarMedicoUsuario();
+                await AsignarChatUsuario();
+                return Constantes.ACEPTADO;
+            }
+            return user.EstadoPaciente; // PENDIENTE o RECHAZADO
         }
-        return _usuarioConectado != null;
+        return Constantes.CREDENCIALES_INCORRECTAS;
     }
 
     private async Task AsignarMedicoUsuario()

@@ -4,6 +4,7 @@ using CommunityToolkit.Maui;
 using PrEParateApp.View;
 using PrEParateApp.Model;
 using PrEParateApp.ViewModel;
+using System.Globalization;
 
 namespace PrEParateApp;
 
@@ -26,6 +27,11 @@ public static class MauiProgram
             });
 
         // Continue initializing your .NET MAUI App here
+
+        // Establecer la cultura en español
+        var culture = new CultureInfo("es-ES");
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
 
         //Supabase Config
         builder.Services.AddSingleton(provider => new Supabase.Client(AppConfig.SUPABASE_URL, AppConfig.SUPABASE_KEY));
@@ -55,6 +61,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<ChatRepository>();
         builder.Services.AddSingleton<MensajeRepository>();
         builder.Services.AddSingleton<AuthenticationService>();
+        builder.Services.AddSingleton<RegisterService>();
+        builder.Services.AddSingleton<MedicoService>();
 
         App = builder.Build();
         return App;

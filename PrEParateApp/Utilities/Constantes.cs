@@ -14,6 +14,6 @@ namespace PrEParateApp.Utilities
         public const string PENDIENTE = "PENDIENTE";
         public const string ACEPTADO = "ACEPTADO";
         public const string RECHAZADO = "RECHAZADO";
-
+        public static string CREDENCIALES_INCORRECTAS = "CREDENCIALES_INCORRECTAS";
     }
 }
