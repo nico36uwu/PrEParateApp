@@ -147,16 +147,16 @@ namespace PrEParateApp.ViewModel
             var usuarioId = _authService.UsuarioConectado.ID;
             var recordatorios = await _recordatorioService.ObtenerRecordatoriosPorUsuario(usuarioId);
             Recordatorios = new ObservableCollection<Recordatorio>(recordatorios);
-            PaginaActual = 0;
+            PaginaActual = 1;
             CargarRecordatoriosPaginados();
         }
 
         private void CargarRecordatoriosPaginados()
         {
-            var recordatoriosPaginados = Recordatorios.Skip(PaginaActual * PageSize).Take(PageSize);
+            var recordatoriosPaginados = Recordatorios.Skip((PaginaActual - 1) * PageSize).Take(PageSize);
             RecordatoriosPaginados = new ObservableCollection<Recordatorio>(recordatoriosPaginados);
-            PuedeAvanzar = Recordatorios.Count > (PaginaActual + 1) * PageSize;
-            PuedeRetroceder = PaginaActual > 0;
+            PuedeAvanzar = Recordatorios.Count > PaginaActual * PageSize;
+            PuedeRetroceder = PaginaActual > 1;
 
             TotalPaginas = (int)Math.Ceiling((double)Recordatorios.Count / PageSize);
             TotalRecordatoriosText = $"Total de Recordatorios: {Recordatorios.Count}";

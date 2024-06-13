@@ -8,9 +8,19 @@ namespace PrEParateApp.View
 
         public MainPageView()
         {
-
             InitializeComponent();
+            SetDefaultTab();
+        }
 
+        private void SetDefaultTab()
+        {
+            // Encontrar el TabBar
+            var tabBar = Items[0] as TabBar;
+            if (tabBar != null)
+            {
+                // Establecer el ShellContent predeterminado como el segundo elemento (AgendaPersonalView)
+                tabBar.CurrentItem = tabBar.Items[2];
+            }
         }
 
     }

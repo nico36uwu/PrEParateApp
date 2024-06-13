@@ -18,13 +18,13 @@
         <!--Aquí para la pestaña en la que trabajeis cambiad la ruta del DataTemplate, así cargará la página, y poned un icono-->
         <ShellContent Icon="chat"
                       ContentTemplate="{DataTemplate views:ChatView}"/>
-        
-        <ShellContent Icon="agenda"
-                      ContentTemplate="{DataTemplate views:AgendaPersonalView}" />
-        
+
         <ShellContent Icon="calendario"
                       ContentTemplate="{DataTemplate views:CalendarioView}" />
-        
+
+        <ShellContent Icon="agenda"
+                      ContentTemplate="{DataTemplate views:AgendaPersonalView}" />
+
         <ShellContent Icon="cuestionario"
                       ContentTemplate="{DataTemplate views:CuestionarioView}" />
 

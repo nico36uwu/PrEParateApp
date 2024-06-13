@@ -15,7 +15,7 @@
         <BoxView Color="Red" Grid.Row="0" HeightRequest="50" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
         <Label Text="Recordatorio" FontSize="24" FontAttributes="Bold" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
 
-        <CollectionView ItemsSource="{Binding RecordatoriosPaginados}" SelectionMode="None" Grid.Row="1" Margin="10,20,10,20">
+        <CollectionView ItemsSource="{Binding RecordatoriosPaginados}" SelectionMode="None" Grid.Row="1" Margin="10,10,10,20">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Orientation="Horizontal" Spacing="12">
@@ -32,12 +32,10 @@
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
                 <Button Text="Anterior" Command="{Binding AnteriorPaginaCommand}" IsEnabled="{Binding PuedeRetroceder}" />
                 <Label Text="{Binding PaginaActual}" VerticalOptions="Center" />
-                <Label Text="de" VerticalOptions="Center" />
-                <Label Text="{Binding TotalPaginas}" VerticalOptions="Center" />
                 <Button Text="Siguiente" Command="{Binding SiguientePaginaCommand}" IsEnabled="{Binding PuedeAvanzar}" />
             </StackLayout>
 
-            <Label Text="{Binding TotalRecordatoriosText}" HorizontalOptions="Center" />
+            <Label Text="{Binding TotalRecordatoriosText}" HorizontalOptions="Center" VerticalOptions="Center"/>
 
             <Label Text="Nombre del Recordatorio" />
             <Entry Text="{Binding Nombre}" Placeholder="Introduce el nombre del recordatorio" />
