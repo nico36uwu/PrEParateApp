@@ -15,7 +15,7 @@ namespace PrEParateApp.ViewModel
     {
         private readonly RecordatorioService _recordatorioService;
         private readonly AuthenticationService _authService;
-        private const int PageSize = 6;
+        private const int PageSize = 5;
 
         public RecordatorioVM(RecordatorioService recordatorioService, AuthenticationService authService)
         {
@@ -62,6 +62,12 @@ namespace PrEParateApp.ViewModel
         [ObservableProperty]
         private bool puedeRetroceder;
 
+        [ObservableProperty]
+        private int totalPaginas;
+
+        [ObservableProperty]
+        private string totalRecordatoriosText;
+
         [RelayCommand]
         public async Task Guardar()
         {
@@ -92,6 +98,7 @@ namespace PrEParateApp.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Éxito", "Recordatorio creado correctamente.", "OK");
                 Recordatorios.Add(recordatorio);
                 CargarRecordatoriosPaginados();
+                LimpiarCampos();
             }
             else
             {
@@ -150,6 +157,16 @@ namespace PrEParateApp.ViewModel
             RecordatoriosPaginados = new ObservableCollection<Recordatorio>(recordatoriosPaginados);
             PuedeAvanzar = Recordatorios.Count > (PaginaActual + 1) * PageSize;
             PuedeRetroceder = PaginaActual > 0;
+
+            TotalPaginas = (int)Math.Ceiling((double)Recordatorios.Count / PageSize);
+            TotalRecordatoriosText = $"Total de Recordatorios: {Recordatorios.Count}";
+        }
+
+        private void LimpiarCampos()
+        {
+            Nombre = string.Empty;
+            Frecuencia = string.Empty;
+            Hora = DateTime.Now.TimeOfDay;
         }
 
         [RelayCommand]
