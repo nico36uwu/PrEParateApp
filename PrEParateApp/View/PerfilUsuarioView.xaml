@@ -17,14 +17,15 @@
             
             <!-- Datos del usuario -->
             <StackLayout Spacing="7">
-                <Label Text="MEDICO" 
-                       FontAttributes="Bold"
-                       FontSize="Large"
-                       HorizontalOptions="Center"/>
 
-                <Label Text="{Binding Medico.Nombre}" 
-                       FontSize="Medium"
-                       HorizontalOptions="Center"/>
+                <Label Text="Nombre y Apellidos" 
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalOptions="Center"/>
+
+                <Label Text="{Binding Usuario.Nombre}" 
+                        FontSize="Medium"
+                        HorizontalOptions="Center"/>
 
                 <Label Text="DNI" 
                        FontAttributes="Bold"
@@ -35,14 +36,14 @@
                        FontSize="Medium"
                        HorizontalOptions="Center"/>
 
-                <Label Text="Nombre y Apellidos" 
-                       FontAttributes="Bold"
-                       FontSize="Large"
-                       HorizontalOptions="Center"/>
+                <Label Text="MEDICO" 
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalOptions="Center"/>
 
-                <Label Text="{Binding Usuario.Nombre}" 
-                       FontSize="Medium"
-                       HorizontalOptions="Center"/>
+                <Label Text="{Binding Medico.Nombre}" 
+                        FontSize="Medium"
+                        HorizontalOptions="Center"/>
 
                 <Label Text="Fecha de Nacimiento" 
                        FontAttributes="Bold"

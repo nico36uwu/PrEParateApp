@@ -5,22 +5,47 @@
              x:Class="PrEParateApp.View.RecordatorioView"
              Title="Recordatorio">
 
-    
+    <Grid Padding="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-    <VerticalStackLayout Padding="20" Spacing="10">
+        <BoxView Color="Red" Grid.Row="0" HeightRequest="50" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+        <Label Text="Recordatorio" FontSize="24" FontAttributes="Bold" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
 
-        <Label Text="Nombre del Recordatorio" />
-        <Entry Text="{Binding Nombre}" Placeholder="Introduce el nombre del recordatorio" />
+        <CollectionView ItemsSource="{Binding RecordatoriosPaginados}" SelectionMode="None" Grid.Row="1" Margin="10,20,10,20">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" Spacing="12">
+                        <Label Text="{Binding Frecuencia}" VerticalOptions="Center" FontAttributes="Bold" />
+                        <Label Text="{Binding Nombre}" VerticalOptions="Center" />
+                        <BoxView WidthRequest ="0" HeightRequest="45" Color="Transparent" />
+                        <Button Text="Eliminar" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RecordatorioVM}}, Path=EliminarCommand}" CommandParameter="{Binding .}" BackgroundColor="Red" TextColor="White" HorizontalOptions="EndAndExpand" WidthRequest="85" HeightRequest="38"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-        <Label Text="Frecuencia" />
-        <Picker ItemsSource="{Binding Frecuencias}" SelectedItem="{Binding Frecuencia}" />
+        <StackLayout Grid.Row="2" Spacing="15" Padding="10">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+                <Button Text="Anterior" Command="{Binding AnteriorPaginaCommand}" IsEnabled="{Binding PuedeRetroceder}" />
+                <Button Text="Siguiente" Command="{Binding SiguientePaginaCommand}" IsEnabled="{Binding PuedeAvanzar}" />
+            </StackLayout>
 
-        <Label Text="Hora" />
-        <TimePicker Time="{Binding Hora}" />
+            <Label Text="Nombre del Recordatorio" />
+            <Entry Text="{Binding Nombre}" Placeholder="Introduce el nombre del recordatorio" />
 
-        <Button Text="Guardar" Command="{Binding GuardarCommand}" BackgroundColor="Red" TextColor="White" />
-        <Button Text="Volver" Command="{Binding VolverCommand}" BackgroundColor="Red" TextColor="White" />
+            <Label Text="Frecuencia" />
+            <Picker ItemsSource="{Binding Frecuencias}" SelectedItem="{Binding Frecuencia}" />
 
-    </VerticalStackLayout>
-    
+            <Label Text="Hora" />
+            <TimePicker Time="{Binding Hora}" />
+
+            <Button Text="Guardar" Command="{Binding GuardarCommand}" BackgroundColor="Red" TextColor="White" />
+
+            <Button Text="Volver" Command="{Binding VolverCommand}" BackgroundColor="Red" TextColor="White" />
+        </StackLayout>
+    </Grid>
 </ContentPage>
