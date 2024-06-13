@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrEParateApp.ViewModel
 {
-    internal class CalendarioVM
+    public partial class CalendarioVM
     {
     }
 }

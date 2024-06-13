@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PrEParateApp.ViewModel"
              x:Class="PrEParateApp.View.AgendaPersonalView"
-             Title="AgendaPersonal">
-    <VerticalStackLayout>
+             Title="Agenda Personal">
+
+    <VerticalStackLayout Padding="20" Spacing="60">
+
         <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
+            Text="AGENDA PERSONAL"
+            FontSize="24"
+            FontAttributes="Bold"
             HorizontalOptions="Center" />
+
+        <!-- Aquí irán los elementos de la lista de eventos -->
+
+        <Button 
+            Text="REGISTRAR TOMA DE MEDICACIÓN"
+            Command="{Binding RegistrarTomaCommand}"
+            BackgroundColor="Red"
+            TextColor="White"
+            FontAttributes="Bold"
+            HorizontalOptions="Fill" />
+
+        <Button 
+            Text="CONFIGURAR RECORDATORIO"
+            Command="{Binding ConfigurarRecordatorioCommand}"
+            BackgroundColor="Red"
+            TextColor="White"
+            FontAttributes="Bold"
+            HorizontalOptions="Fill" />
+
     </VerticalStackLayout>
 </ContentPage>

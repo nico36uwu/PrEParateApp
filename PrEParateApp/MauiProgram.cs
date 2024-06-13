@@ -5,6 +5,7 @@ using PrEParateApp.View;
 using PrEParateApp.Model;
 using PrEParateApp.ViewModel;
 using System.Globalization;
+using Plugin.LocalNotification;
 
 namespace PrEParateApp;
 
@@ -17,6 +18,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseLocalNotification()
             // Initialize the .NET MAUI Community Toolkit by adding the below line of code
             .UseMauiCommunityToolkit()
             // After initializing the .NET MAUI Community Toolkit, optionally add additional fonts
@@ -45,6 +47,10 @@ public static class MauiProgram
         builder.Services.AddTransient<PerfilUsuarioView>();
         builder.Services.AddTransient<LoginView>();
         builder.Services.AddTransient<RegisterView>();
+        builder.Services.AddTransient<EventoView>();
+        builder.Services.AddTransient<RecordatorioView>();
+        builder.Services.AddTransient<RegistroMedicacionView>();
+
 
         //ViewModel
         builder.Services.AddTransient<ChatVM>();
@@ -54,15 +60,20 @@ public static class MauiProgram
         builder.Services.AddTransient<PerfilUsuarioVM>();
         builder.Services.AddTransient<LoginVM>();
         builder.Services.AddTransient<RegisterVM>();
+        builder.Services.AddTransient<EventoVM>();
+        builder.Services.AddTransient<RecordatorioVM>();
+        builder.Services.AddTransient<RegistroMedicacionVM>();
 
         //Services
         builder.Services.AddSingleton<UsuarioRepository>();
         builder.Services.AddSingleton<MedicoRepository>();
         builder.Services.AddSingleton<ChatRepository>();
         builder.Services.AddSingleton<MensajeRepository>();
+        builder.Services.AddSingleton<RecordatorioRepository>();
         builder.Services.AddSingleton<AuthenticationService>();
         builder.Services.AddSingleton<RegisterService>();
         builder.Services.AddSingleton<MedicoService>();
+        builder.Services.AddSingleton<RecordatorioService>();
 
         App = builder.Build();
         return App;

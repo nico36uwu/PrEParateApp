@@ -1,7 +1,8 @@
 ﻿using PrEParateApp.Model;
 using PrEParateApp.View;
 using PrEParateApp.ViewModel;
-using Microsoft.Extensions.DependencyInjection;  // Importar para usar GetRequiredService
+using Microsoft.Extensions.DependencyInjection;
+using Plugin.LocalNotification;  // Importar para usar GetRequiredService
 
 namespace PrEParateApp
 {
@@ -30,6 +31,9 @@ namespace PrEParateApp
                 Routing.RegisterRoute(nameof(PerfilUsuarioView), typeof(PerfilUsuarioView));
                 Routing.RegisterRoute(nameof(LoginView), typeof(LoginView));
                 Routing.RegisterRoute(nameof(RegisterView), typeof(RegisterView));
+                Routing.RegisterRoute(nameof(EventoView), typeof(EventoView));
+                Routing.RegisterRoute(nameof(RecordatorioView), typeof(RecordatorioView));
+                Routing.RegisterRoute(nameof(RegistroMedicacionView), typeof(RegistroMedicacionView));
             }
             catch (Exception e)
             {
