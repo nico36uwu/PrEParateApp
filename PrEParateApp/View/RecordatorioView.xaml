@@ -37,11 +37,11 @@
 
             <Label Text="{Binding TotalRecordatoriosText}" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-            <Label Text="Nombre del Recordatorio" />
-            <Entry Text="{Binding Nombre}" Placeholder="Introduce el nombre del recordatorio" />
-
             <Label Text="Frecuencia" />
             <Picker ItemsSource="{Binding Frecuencias}" SelectedItem="{Binding Frecuencia}" />
+
+            <Label Text="Nombre del Recordatorio" />
+            <Entry Text="{Binding Nombre}" Placeholder="Introduce el nombre del recordatorio" />
 
             <Label Text="Hora" />
             <TimePicker Time="{Binding Hora}" />

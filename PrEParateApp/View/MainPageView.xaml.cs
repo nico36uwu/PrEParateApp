@@ -23,6 +23,15 @@ namespace PrEParateApp.View
             }
         }
 
+        public void SetCalendarioTab()
+        {
+            var tabBar = Items[0] as TabBar;
+            if (tabBar != null)
+            {
+                tabBar.CurrentItem = tabBar.Items[1];
+            }
+        }
+
     }
 
 }

@@ -71,11 +71,13 @@ public static class MauiProgram
         builder.Services.AddSingleton<MensajeRepository>();
         builder.Services.AddSingleton<RecordatorioRepository>();
         builder.Services.AddSingleton<TomaMedicacionRepository>();
+        builder.Services.AddSingleton<EventoRepository>();
         builder.Services.AddSingleton<AuthenticationService>();
         builder.Services.AddSingleton<RegisterService>();
         builder.Services.AddSingleton<MedicoService>();
         builder.Services.AddSingleton<RecordatorioService>();
         builder.Services.AddSingleton<TomaMedicacionService>();
+        builder.Services.AddSingleton<EventoService>();
 
         App = builder.Build();
         return App;

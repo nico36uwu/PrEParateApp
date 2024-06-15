@@ -14,7 +14,7 @@ namespace PrEParateApp.Utilities
         public const string PENDIENTE = "Pendiente";
         public const string ACEPTADO = "Aceptado";
         public const string RECHAZADO = "Rechazado";
-        public const string CREDENCIALES_INCORRECTAS = "CredencialesIncorrctas";
+        public const string CREDENCIALES_INCORRECTAS = "Credenciales Incorrctas";
 
         public const string FRECUENCIA_DIARIA = "Diaria";
         public const string FRECUENCIA_LUNES = "Lunes";
@@ -25,6 +25,11 @@ namespace PrEParateApp.Utilities
         public const string FRECUENCIA_SABADO = "Sabado";
         public const string FRECUENCIA_DOMINGO = "Domingo";
 
+        public const string TIPO_CITA_MEDICA = "Cita Médica";
+        public const string TIPO_VACUNA = "Vacuna";
+        public const string TIPO_CITA_CONTROL = "Cita de Control";
+        public const string TIPO_ANALISIS_CLINICO = "Análisis Clínico";
+        public const string TIPO_TRATAMIENTO_ESPECIFICO = "Tratamiento Específico";
 
     }
 }

@@ -20,6 +20,7 @@ namespace PrEParateApp.ViewModel
             _authService = authService;
             Fecha = DateTime.Now;
             Hora = DateTime.Now.TimeOfDay;
+            MaxFecha = DateTime.Now;
         }
 
         [ObservableProperty]
@@ -30,6 +31,9 @@ namespace PrEParateApp.ViewModel
 
         [ObservableProperty]
         private string comentarios;
+
+        [ObservableProperty]
+        private DateTime maxFecha;
 
         public void SetPopup(Popup popup)
         {
@@ -42,6 +46,12 @@ namespace PrEParateApp.ViewModel
             if (string.IsNullOrEmpty(Comentarios))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Los comentarios no pueden estar vacíos.", "OK");
+                return;
+            }
+
+            if (Fecha > DateTime.Now)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "La fecha de la toma de medicación no puede ser en el futuro.", "OK");
                 return;
             }
 

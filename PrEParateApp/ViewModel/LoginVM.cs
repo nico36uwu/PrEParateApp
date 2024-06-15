@@ -47,7 +47,7 @@ namespace PrEParateApp.ViewModel
                 {
                     case Constantes.ACEPTADO:
                         // Navegar a la página principal
-                        Application.Current.MainPage = new MainPageView();
+                        Application.Current.MainPage = MauiProgram.App.Services.GetService<MainPageView>();
                         break;
                     case Constantes.PENDIENTE:
                         await ShowErrorMessage("Su cuenta está pendiente de aprobación.");

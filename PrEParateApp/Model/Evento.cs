@@ -1,5 +1,7 @@
-﻿using Postgrest.Attributes;
+﻿using CommunityToolkit.Mvvm.Input;
+using Postgrest.Attributes;
 using Postgrest.Models;
+using PrEParateApp.View;
 using System;
 
 namespace PrEParateApp.Model

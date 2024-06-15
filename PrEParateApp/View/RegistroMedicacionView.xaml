@@ -10,7 +10,7 @@
            StrokeThickness="4">
         <VerticalStackLayout Spacing="10">
             <Label Text="Fecha" FontSize="Medium" />
-            <DatePicker Date="{Binding Fecha}" />
+            <DatePicker Date="{Binding Fecha}" MaximumDate="{Binding MaxFecha}" />
 
             <Label Text="Hora" FontSize="Medium" />
             <TimePicker Time="{Binding Hora}" />

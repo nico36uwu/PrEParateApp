@@ -3,10 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PrEParateApp.View.CalendarioView"
              Title="Calendario">
-    <VerticalStackLayout>
+    
+    <VerticalStackLayout Padding="20" Spacing="60">
+
         <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        Text="CALENDARIO"
+        FontSize="24"
+        FontAttributes="Bold"
+        HorizontalOptions="Center" />
+
+        <!-- Aquí irán los elementos de la lista de eventos -->
+
+        <Button 
+        Text="PLANIFICAR NUEVO EVENTO"
+        Command="{Binding PlanificarNuevoEventoCommand}"
+        BackgroundColor="Red"
+        TextColor="White"
+        FontAttributes="Bold"
+        HorizontalOptions="Fill" />
+
     </VerticalStackLayout>
+    
 </ContentPage>
