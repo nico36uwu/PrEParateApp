@@ -8,5 +8,6 @@ public partial class CalendarioView : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = c;
+		c.CalendarGrid = CalendarGrid;
 	}
 }

@@ -106,16 +106,20 @@ namespace PrEParateApp.ViewModel
         [RelayCommand]
         public async Task Eliminar(Evento evento)
         {
-            bool isEventoEliminado = await _eventoService.EliminarEvento(evento);
-            if (isEventoEliminado)
+            bool confirm = await Application.Current.MainPage.DisplayAlert("Confirmar", "¿Está seguro de eliminar esta toma de medicación?", "Sí", "No");
+            if (confirm)
             {
-                await Application.Current.MainPage.DisplayAlert("Éxito", "Evento eliminado correctamente.", "OK");
-                Eventos.Remove(evento);
-                CargarEventosPaginados();
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "Hubo un problema al eliminar el evento. Inténtelo de nuevo.", "OK");
+                bool isEventoEliminado = await _eventoService.EliminarEvento(evento);
+                if (isEventoEliminado)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Éxito", "Evento eliminado correctamente.", "OK");
+                    Eventos.Remove(evento);
+                    CargarEventosPaginados();
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Hubo un problema al eliminar el evento. Inténtelo de nuevo.", "OK");
+                }
             }
         }
 

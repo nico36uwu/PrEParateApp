@@ -109,16 +109,20 @@ namespace PrEParateApp.ViewModel
         [RelayCommand]
         public async Task Eliminar(Recordatorio recordatorio)
         {
-            bool isRecordatorioEliminado = await _recordatorioService.EliminarRecordatorio(recordatorio);
-            if (isRecordatorioEliminado)
+            bool confirm = await Application.Current.MainPage.DisplayAlert("Confirmar", "¿Está seguro de eliminar esta toma de medicación?", "Sí", "No");
+            if (confirm)
             {
-                await Application.Current.MainPage.DisplayAlert("Éxito", "Recordatorio eliminado correctamente.", "OK");
-                Recordatorios.Remove(recordatorio);
-                CargarRecordatoriosPaginados();
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "Hubo un problema al eliminar el recordatorio. Inténtelo de nuevo.", "OK");
+                bool isRecordatorioEliminado = await _recordatorioService.EliminarRecordatorio(recordatorio);
+                if (isRecordatorioEliminado)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Éxito", "Recordatorio eliminado correctamente.", "OK");
+                    Recordatorios.Remove(recordatorio);
+                    CargarRecordatoriosPaginados();
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Hubo un problema al eliminar el recordatorio. Inténtelo de nuevo.", "OK");
+                }
             }
         }
 

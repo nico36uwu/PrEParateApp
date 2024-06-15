@@ -63,4 +63,10 @@ public class TomaMedicacionService
     {
         return await _tomaMedicacionRepository.GetByUserId(userId);
     }
+
+    public async Task<TomaMedicacion> ObtenerTomaPorId(int id)
+    {
+        var tomas = await _tomaMedicacionRepository.GetById(id);
+        return tomas.FirstOrDefault();
+    }
 }

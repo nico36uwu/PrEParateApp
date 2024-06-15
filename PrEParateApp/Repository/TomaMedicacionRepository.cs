@@ -44,4 +44,10 @@ public class TomaMedicacionRepository
         var response = await _supabaseClient.From<TomaMedicacion>().Where(b => b.UsuarioId == userId).Get();
         return response.Models;
     }
+
+    public async Task<IEnumerable<TomaMedicacion>> GetById(int id)
+    {
+        var response = await _supabaseClient.From<TomaMedicacion>().Where(b => b.Id == id).Get();
+        return response.Models;
+    }
 }

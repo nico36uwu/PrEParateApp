@@ -2,34 +2,80 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:PrEParateApp.ViewModel"
+             xmlns:conv="clr-namespace:PrEParateApp.Utilities"
              x:Class="PrEParateApp.View.AgendaPersonalView"
              Title="Agenda Personal">
 
-    <VerticalStackLayout Padding="20" Spacing="60">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:TipoItemToVisibilityConverter x:Key="TipoItemToVisibilityConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-        <Label 
-            Text="AGENDA PERSONAL"
-            FontSize="24"
-            FontAttributes="Bold"
-            HorizontalOptions="Center" />
+    <Grid Padding="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <!-- Aquí irán los elementos de la lista de eventos -->
+        <BoxView Color="Red" Grid.Row="0" HeightRequest="50" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+        <Label Text="Agenda Personal" FontSize="24" FontAttributes="Bold" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
 
-        <Button 
-            Text="REGISTRAR TOMA DE MEDICACIÓN"
-            Command="{Binding RegistrarTomaCommand}"
-            BackgroundColor="Red"
-            TextColor="White"
-            FontAttributes="Bold"
-            HorizontalOptions="Fill" />
+        <VerticalStackLayout Grid.Row="1" Padding="20" Spacing="20">
+            <!-- Filtro -->
+            <Label Text="Seleccione el tipo de información a mostrar" FontSize="16" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding TiposDeItems}" SelectedItem="{Binding TipoSeleccionado}" Title="Seleccione Tipo" />
 
-        <Button 
-            Text="CONFIGURAR RECORDATORIO"
-            Command="{Binding ConfigurarRecordatorioCommand}"
-            BackgroundColor="Red"
-            TextColor="White"
-            FontAttributes="Bold"
-            HorizontalOptions="Fill" />
+            <!-- Listado de Items -->
+            <CollectionView ItemsSource="{Binding ItemsPaginados}" SelectionMode="None" Margin="0,20,0,20">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" Margin="0,5">
+                            <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy}'}" VerticalOptions="Center" FontAttributes="Bold" Grid.Column="0" />
+                            <Label Text="{Binding Descripcion}" VerticalOptions="Center" Grid.Column="1" Margin="10,0" />
+                            <BoxView WidthRequest ="0" HeightRequest="45" Color="Transparent" />
+                            <Button Text="Eliminar" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AgendaPersonalVM}}, Path=EliminarItemCommand}" 
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="Red" 
+                                    TextColor="White"
+                                    IsVisible="{Binding Tipo, Converter={StaticResource TipoItemToVisibilityConverter}}"
+                                    Grid.Column="2"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
 
-    </VerticalStackLayout>
+        <!-- Paginación -->
+        <VerticalStackLayout Grid.Row="2" Spacing="15">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10" >
+                <Button Text="Anterior" Command="{Binding AnteriorPaginaCommand}" IsEnabled="{Binding PuedeRetroceder}" />
+                <Label Text="{Binding PaginaActual}" VerticalOptions="Center" />
+                <Button Text="Siguiente" Command="{Binding SiguientePaginaCommand}" IsEnabled="{Binding PuedeAvanzar}" />
+            </StackLayout>
+            <Label Text="{Binding TotalItemsText}" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10"/>
+        </VerticalStackLayout>
+
+        <!-- Botones de Acciones -->
+        <StackLayout Grid.Row="3" VerticalOptions="End" Spacing="25" Padding="15" Margin="0,0,0,30">
+            <Button 
+                Text="REGISTRAR TOMA DE MEDICACIÓN"
+                Command="{Binding RegistrarTomaCommand}"
+                BackgroundColor="Red"
+                TextColor="White"
+                FontAttributes="Bold"
+                HorizontalOptions="Fill" />
+
+            <Button 
+                Text="CONFIGURAR RECORDATORIO"
+                Command="{Binding ConfigurarRecordatorioCommand}"
+                BackgroundColor="Red"
+                TextColor="White"
+                FontAttributes="Bold"
+                HorizontalOptions="Fill" />
+        </StackLayout>
+    </Grid>
 </ContentPage>

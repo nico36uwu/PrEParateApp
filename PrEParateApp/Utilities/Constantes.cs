@@ -31,5 +31,8 @@ namespace PrEParateApp.Utilities
         public const string TIPO_ANALISIS_CLINICO = "Análisis Clínico";
         public const string TIPO_TRATAMIENTO_ESPECIFICO = "Tratamiento Específico";
 
+        public const string TOMA_MEDICACION = "Toma de Medicación";
+        public const string EVENTO = "Evento";
+
     }
 }

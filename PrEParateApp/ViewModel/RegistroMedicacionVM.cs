@@ -63,6 +63,7 @@ namespace PrEParateApp.ViewModel
             if (isTomaCreada)
             {
                 await Application.Current.MainPage.DisplayAlert("Éxito", "Toma de medicación registrada correctamente.", "OK");
+                MessagingCenter.Send(this, "NuevaTomaMedicacionRegistrada");
                 // Reiniciar campos
                 Fecha = DateTime.Now;
                 Hora = DateTime.Now.TimeOfDay;
