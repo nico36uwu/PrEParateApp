@@ -70,10 +70,12 @@ public static class MauiProgram
         builder.Services.AddSingleton<ChatRepository>();
         builder.Services.AddSingleton<MensajeRepository>();
         builder.Services.AddSingleton<RecordatorioRepository>();
+        builder.Services.AddSingleton<TomaMedicacionRepository>();
         builder.Services.AddSingleton<AuthenticationService>();
         builder.Services.AddSingleton<RegisterService>();
         builder.Services.AddSingleton<MedicoService>();
         builder.Services.AddSingleton<RecordatorioService>();
+        builder.Services.AddSingleton<TomaMedicacionService>();
 
         App = builder.Build();
         return App;

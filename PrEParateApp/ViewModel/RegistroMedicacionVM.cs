@@ -1,22 +1,79 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using PrEParateApp.View;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using PrEParateApp.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PrEParateApp.ViewModel
 {
-    public partial class RegistroMedicacionVM
+    public partial class RegistroMedicacionVM : ObservableObject
     {
+        private readonly TomaMedicacionService _tomaMedicacionService;
+        private readonly AuthenticationService _authService;
+        private Popup _popUp;
 
-        public RegistroMedicacionVM() { }
+
+        public RegistroMedicacionVM(TomaMedicacionService tomaMedicacionService, AuthenticationService authService)
+        {
+            _tomaMedicacionService = tomaMedicacionService;
+            _authService = authService;
+            Fecha = DateTime.Now;
+            Hora = DateTime.Now.TimeOfDay;
+        }
+
+        [ObservableProperty]
+        private DateTime fecha;
+
+        [ObservableProperty]
+        private TimeSpan hora;
+
+        [ObservableProperty]
+        private string comentarios;
+
+        public void SetPopup(Popup popup)
+        {
+            _popUp = popup;
+        }
 
         [RelayCommand]
-        public async void Volver()
+        public async Task Guardar()
         {
-            Application.Current.MainPage = MauiProgram.App.Services.GetService<MainPageView>();
+            if (string.IsNullOrEmpty(Comentarios))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Los comentarios no pueden estar vacíos.", "OK");
+                return;
+            }
+
+            var usuarioId = _authService.UsuarioConectado.ID;
+            var tomaMedicacion = new TomaMedicacion(Comentarios, Fecha, Hora, usuarioId);
+
+            bool isTomaCreada = await _tomaMedicacionService.CrearTomaMedicacion(tomaMedicacion);
+
+            if (isTomaCreada)
+            {
+                await Application.Current.MainPage.DisplayAlert("Éxito", "Toma de medicación registrada correctamente.", "OK");
+                // Reiniciar campos
+                Fecha = DateTime.Now;
+                Hora = DateTime.Now.TimeOfDay;
+                Comentarios = string.Empty;
+                ClosePopup();
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Hubo un problema al registrar la toma de medicación. Inténtelo de nuevo.", "OK");
+            }
+        }
+
+        [RelayCommand]
+        public void Volver()
+        {
+            ClosePopup();
+        }
+
+        private void ClosePopup()
+        {
+            _popUp?.Close();
         }
     }
 }

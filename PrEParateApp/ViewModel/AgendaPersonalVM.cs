@@ -1,24 +1,33 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PrEParateApp.View;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PrEParateApp.ViewModel
 {
     public partial class AgendaPersonalVM : ObservableObject
     {
+        private readonly IServiceProvider _serviceProvider;
+
+        public AgendaPersonalVM(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
         [RelayCommand]
         public async Task RegistrarToma()
         {
-            // Lógica para registrar toma de medicación
-            Application.Current.MainPage = MauiProgram.App.Services.GetService<RegistroMedicacionView>();
+            var viewModel = _serviceProvider.GetRequiredService<RegistroMedicacionVM>();
+            var popup = new RegistroMedicacionView(viewModel);
+            await Application.Current.MainPage.ShowPopupAsync(popup);
         }
 
         [RelayCommand]
         public async Task ConfigurarRecordatorio()
         {
-            // Lógica para configurar recordatorio
-            Application.Current.MainPage = MauiProgram.App.Services.GetService<RecordatorioView>();
+            Application.Current.MainPage = _serviceProvider.GetService<RecordatorioView>();
         }
     }
 }
