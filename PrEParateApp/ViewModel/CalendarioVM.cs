@@ -90,13 +90,7 @@ namespace PrEParateApp.ViewModel
                     VerticalOptions = LayoutOptions.Center,
                     FontSize = 25,
                     FontAttributes = FontAttributes.Bold,
-                    Padding = new Microsoft.Maui.Thickness
-                    {
-                        Bottom = 10,
-                        Top = 0,
-                        Left = 0,
-                        Right = 0,
-                    }
+                    Padding = new Microsoft.Maui.Thickness(0, 0, 0, 10)
                 };
                 CalendarGrid.Children.Add(label);
                 Grid.SetRow(label, 0);
@@ -106,8 +100,7 @@ namespace PrEParateApp.ViewModel
             // Obtener el primer día del mes
             var firstDayOfMonth = new DateTime(CurrentDate.Year, CurrentDate.Month, 1);
             var daysInMonth = DateTime.DaysInMonth(CurrentDate.Year, CurrentDate.Month);
-            var startDayOfWeek = (int)firstDayOfMonth.DayOfWeek;
-            startDayOfWeek = startDayOfWeek == 0 ? 7 : startDayOfWeek; // Ajustar el domingo como el último día de la semana
+            var startDayOfWeek = ((int)firstDayOfMonth.DayOfWeek + 6) % 7; // Ajustar el domingo como el último día de la semana
 
             // Rellenar el calendario con los días del mes
             int row = 1;
@@ -163,9 +156,6 @@ namespace PrEParateApp.ViewModel
             }
         }
 
-
-
-
         [RelayCommand]
         public void MesAnterior()
         {
@@ -186,10 +176,10 @@ namespace PrEParateApp.ViewModel
 
         private void ActualizarResumen()
         {
-            var eventosMes = Eventos.Count(e => e.Fecha.Month == CurrentDate.Month && e.Fecha.Year == CurrentDate.Year);
+            var eventosPendientes = Eventos.Count(e => e.Fecha >= DateTime.Today && e.Fecha.Month == CurrentDate.Month && e.Fecha.Year == CurrentDate.Year);
             var tomasMes = TomasDeMedicacion.Count(t => t.Fecha.Month == CurrentDate.Month && t.Fecha.Year == CurrentDate.Year);
 
-            ResumenEventos = $"Este mes tiene {eventosMes} eventos registrados";
+            ResumenEventos = $"Este mes tiene {eventosPendientes} eventos pendientes";
             ResumenTomasMedicacion = $"Este mes ha registrado {tomasMes} tomas de medicación";
         }
     }
