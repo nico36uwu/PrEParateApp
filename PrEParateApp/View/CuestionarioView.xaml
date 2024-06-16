@@ -20,9 +20,9 @@
             Text="REALIZAR TEST CONDUCTAL"
             BackgroundColor="Red"
             TextColor="White"
-            FontAttributes="Bold"
             HorizontalOptions="Center"
-            VerticalOptions="Center" />
+            VerticalOptions="Center"
+            FontSize="16" FontAttributes="Bold"/>
 
         <Image 
             Source="cuestionario_icono.png" 
@@ -33,9 +33,9 @@
             Text="REALIZAR CUESTIONARIO"
             BackgroundColor="Red"
             TextColor="White"
-            FontAttributes="Bold"
             HorizontalOptions="Center"
-            VerticalOptions="Center" />
+            VerticalOptions="Center"
+            FontSize="16" FontAttributes="Bold"/>
 
     </VerticalStackLayout>
 </ContentPage>

@@ -5,13 +5,15 @@
              Title="Perfil del Usuario">
 
     <ScrollView>
+        
         <VerticalStackLayout Padding="20" Spacing="25">
+            
             <!-- Imagen de perfil -->
             <Frame BackgroundColor="LightGray" HeightRequest="150" WidthRequest="150" CornerRadius="75" HorizontalOptions="Center" VerticalOptions="Center" Padding="3" Margin="0,7,0,0">
                 <Image Source="{Binding ImagenPerfilUrl}" Aspect="AspectFill" HeightRequest="144" WidthRequest="144" />
             </Frame>
 
-            <Button Text="Editar Imagen" Command="{Binding SeleccionarYSubirImagenCommand}" HorizontalOptions="Center" Margin="0,0,0,10" BackgroundColor="Red"/>
+            <Button Text="Editar Imagen" Command="{Binding SeleccionarYSubirImagenCommand}" HorizontalOptions="Center" FontSize="14" FontAttributes="Bold" Margin="0,0,0,10" BackgroundColor="Red"/>
 
             <BoxView HeightRequest="3" BackgroundColor="Gray" HorizontalOptions="FillAndExpand"/>
             

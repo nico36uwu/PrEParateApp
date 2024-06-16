@@ -39,6 +39,9 @@ namespace PrEParateApp.ViewModel
         [ObservableProperty]
         private string resumenTomasMedicacion;
 
+        [ObservableProperty]
+        private string eventoHoy;
+
         public ObservableCollection<Evento> Eventos { get; }
         public ObservableCollection<TomaMedicacion> TomasDeMedicacion { get; }
 
@@ -71,6 +74,7 @@ namespace PrEParateApp.ViewModel
             }
             CargarCalendario();
             ActualizarResumen();
+            VerificarEventoHoy();
         }
 
         private void CargarCalendario()
@@ -163,6 +167,7 @@ namespace PrEParateApp.ViewModel
             DisplayMonth = CurrentDate.ToString("MMMM yyyy", CultureInfo.CurrentCulture).ToUpper();
             CargarCalendario();
             ActualizarResumen();
+            VerificarEventoHoy();
         }
 
         [RelayCommand]
@@ -172,15 +177,52 @@ namespace PrEParateApp.ViewModel
             DisplayMonth = CurrentDate.ToString("MMMM yyyy", CultureInfo.CurrentCulture).ToUpper();
             CargarCalendario();
             ActualizarResumen();
+            VerificarEventoHoy();
         }
 
         private void ActualizarResumen()
         {
-            var eventosPendientes = Eventos.Count(e => e.Fecha >= DateTime.Today && e.Fecha.Month == CurrentDate.Month && e.Fecha.Year == CurrentDate.Year);
+            var eventosPendientes = Eventos.Count(e => e.Fecha > DateTime.Today && e.Fecha.Month == CurrentDate.Month && e.Fecha.Year == CurrentDate.Year);
             var tomasMes = TomasDeMedicacion.Count(t => t.Fecha.Month == CurrentDate.Month && t.Fecha.Year == CurrentDate.Year);
 
-            ResumenEventos = $"Este mes tiene {eventosPendientes} eventos pendientes";
-            ResumenTomasMedicacion = $"Este mes ha registrado {tomasMes} tomas de medicación";
+            if (eventosPendientes == 0) 
+            {
+                ResumenEventos = $"Este mes no tienes eventos pendientes";
+            }
+            else if (eventosPendientes == 1)
+            {
+                ResumenEventos = $"Este mes tienes {eventosPendientes} evento pendiente";
+            }
+            else
+            {
+                ResumenEventos = $"Este mes tienes {eventosPendientes} eventos pendientes";
+            }
+
+            if (tomasMes == 0)
+            {
+                ResumenTomasMedicacion = $"No hay registradas tomas de mediación";
+            }
+            else if (tomasMes == 1)
+            {
+                ResumenTomasMedicacion = $"Este mes has registrado {tomasMes} toma de medicación";
+            }
+            else
+            {
+                ResumenTomasMedicacion = $"Este mes has registrado {tomasMes} tomas de medicación";
+            }
+        }
+
+        private void VerificarEventoHoy()
+        {
+            var eventoHoy = Eventos.FirstOrDefault(e => e.Fecha.Date == DateTime.Today);
+            if (eventoHoy != null)
+            {
+                EventoHoy = $"Hoy tienes un evento: {eventoHoy.Nombre}";
+            }
+            else
+            {
+                EventoHoy = string.Empty;
+            }
         }
     }
 }

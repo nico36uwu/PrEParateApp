@@ -22,7 +22,7 @@
                         <Label Text="{Binding Frecuencia}" VerticalOptions="Center" FontAttributes="Bold" />
                         <Label Text="{Binding Nombre}" VerticalOptions="Center" />
                         <BoxView WidthRequest ="0" HeightRequest="45" Color="Transparent" />
-                        <Button Text="Eliminar" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RecordatorioVM}}, Path=EliminarCommand}" CommandParameter="{Binding .}" BackgroundColor="Red" TextColor="White" HorizontalOptions="EndAndExpand" WidthRequest="85" HeightRequest="38"/>
+                        <Button Text="Eliminar" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RecordatorioVM}}, Path=EliminarCommand}" CommandParameter="{Binding .}" BackgroundColor="Red" TextColor="White" FontSize="14" FontAttributes="Bold" HorizontalOptions="EndAndExpand" WidthRequest="85" HeightRequest="38"/>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -30,9 +30,9 @@
 
         <StackLayout Grid.Row="2" Spacing="15" Padding="10">
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
-                <Button Text="Anterior" Command="{Binding AnteriorPaginaCommand}" IsEnabled="{Binding PuedeRetroceder}" />
+                <Button Text="Anterior" Command="{Binding AnteriorPaginaCommand}" IsEnabled="{Binding PuedeRetroceder}" FontSize="14" FontAttributes="Bold"/>
                 <Label Text="{Binding PaginaActual}" VerticalOptions="Center" />
-                <Button Text="Siguiente" Command="{Binding SiguientePaginaCommand}" IsEnabled="{Binding PuedeAvanzar}" />
+                <Button Text="Siguiente" Command="{Binding SiguientePaginaCommand}" IsEnabled="{Binding PuedeAvanzar}" FontSize="14" FontAttributes="Bold"/>
             </StackLayout>
 
             <Label Text="{Binding TotalRecordatoriosText}" HorizontalOptions="Center" VerticalOptions="Center"/>
@@ -46,9 +46,9 @@
             <Label Text="Hora" />
             <TimePicker Time="{Binding Hora}" />
 
-            <Button Text="Guardar" Command="{Binding GuardarCommand}" BackgroundColor="Red" TextColor="White" />
+            <Button Text="Guardar" Command="{Binding GuardarCommand}" BackgroundColor="Red" TextColor="White" FontSize="14" FontAttributes="Bold" />
 
-            <Button Text="Volver" Command="{Binding VolverCommand}" BackgroundColor="Red" TextColor="White" />
+            <Button Text="Volver" Command="{Binding VolverCommand}" BackgroundColor="Red" TextColor="White" FontSize="14" FontAttributes="Bold" />
         </StackLayout>
     </Grid>
 </ContentPage>

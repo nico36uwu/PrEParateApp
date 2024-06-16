@@ -22,9 +22,9 @@
 
         <!-- Controles de navegación del mes -->
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Grid.Row="1" Spacing="15" Margin="0,20,0,0">
-            <Button Text="Anterior" Command="{Binding MesAnteriorCommand}" BackgroundColor="Red" TextColor="White"/>
+            <Button Text="Anterior" Command="{Binding MesAnteriorCommand}" BackgroundColor="Red" TextColor="White" FontAttributes="Bold" FontSize="14"/>
             <Label Text="{Binding DisplayMonth}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <Button Text="Siguiente" Command="{Binding MesSiguienteCommand}" BackgroundColor="Red" TextColor="White"/>
+            <Button Text="Siguiente" Command="{Binding MesSiguienteCommand}" BackgroundColor="Red" TextColor="White" FontAttributes="Bold" FontSize="14"/>
         </StackLayout>
 
         <!-- Calendario -->
@@ -61,25 +61,26 @@
         <StackLayout Orientation="Horizontal" Grid.Row="3" HorizontalOptions="CenterAndExpand" Spacing="15" Margin="0,0,0,30">
             <StackLayout Orientation="Horizontal" Spacing="5">
                 <BoxView Color="Blue" WidthRequest="20" HeightRequest="20"/>
-                <Label Text="Hoy"/>
+                <Label Text="Hoy" FontAttributes="Bold"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Spacing="5">
                 <BoxView Color="Green" WidthRequest="20" HeightRequest="20"/>
-                <Label Text="Toma medicación"/>
+                <Label Text="Toma medicación" FontAttributes="Bold"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Spacing="5">
                 <BoxView Color="Red" WidthRequest="20" HeightRequest="20"/>
-                <Label Text="Evento especial"/>
+                <Label Text="Evento pendiente" FontAttributes="Bold"/>
             </StackLayout>
         </StackLayout>
 
         <!-- Resumen del mes -->
         <StackLayout Grid.Row="4" Spacing="10" Padding="10">
+            <Label Text="{Binding EventoHoy}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Red" />
             <Label Text="{Binding ResumenEventos}" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center"/>
             <Label Text="{Binding ResumenTomasMedicacion}" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center"/>
         </StackLayout>
 
         <!-- Botón de planificación de evento -->
-        <Button Grid.Row="5" Text="PLANIFICAR NUEVO EVENTO" Command="{Binding PlanificarNuevoEventoCommand}" BackgroundColor="Red" TextColor="White" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="10,20,10,20"/>
+        <Button Grid.Row="5" Text="PLANIFICAR NUEVO EVENTO" Command="{Binding PlanificarNuevoEventoCommand}" BackgroundColor="Red" TextColor="White" FontSize="16" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="10,20,10,30"/>
     </Grid>
 </ContentPage>

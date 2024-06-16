@@ -34,12 +34,14 @@
                     <DataTemplate>
                         <Grid ColumnDefinitions="Auto,*,Auto,Auto" Margin="0,5">
                             <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy}'}" VerticalOptions="Center" FontAttributes="Bold" Grid.Column="0" />
-                            <Label Text="{Binding Descripcion}" VerticalOptions="Center" Grid.Column="1" Margin="10,0" />
+                            <Label Text="{Binding Descripcion}" VerticalOptions="Center" Grid.Column="1" Margin="15,0" />
                             <BoxView WidthRequest ="0" HeightRequest="45" Color="Transparent" />
                             <Button Text="Eliminar" 
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AgendaPersonalVM}}, Path=EliminarItemCommand}" 
                                     CommandParameter="{Binding .}"
                                     BackgroundColor="Red" 
+                                    FontAttributes="Bold"
+                                    FontSize="14"
                                     TextColor="White"
                                     IsVisible="{Binding Tipo, Converter={StaticResource TipoItemToVisibilityConverter}}"
                                     Grid.Column="2"/>
@@ -52,9 +54,9 @@
         <!-- Paginación -->
         <VerticalStackLayout Grid.Row="2" Spacing="15">
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10" >
-                <Button Text="Anterior" Command="{Binding AnteriorPaginaCommand}" IsEnabled="{Binding PuedeRetroceder}" />
+                <Button Text="Anterior" Command="{Binding AnteriorPaginaCommand}" IsEnabled="{Binding PuedeRetroceder}" FontSize="14" FontAttributes="Bold"/>
                 <Label Text="{Binding PaginaActual}" VerticalOptions="Center" />
-                <Button Text="Siguiente" Command="{Binding SiguientePaginaCommand}" IsEnabled="{Binding PuedeAvanzar}" />
+                <Button Text="Siguiente" Command="{Binding SiguientePaginaCommand}" IsEnabled="{Binding PuedeAvanzar}" FontSize="14" FontAttributes="Bold"/>
             </StackLayout>
             <Label Text="{Binding TotalItemsText}" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,10"/>
         </VerticalStackLayout>
@@ -67,7 +69,8 @@
                 BackgroundColor="Red"
                 TextColor="White"
                 FontAttributes="Bold"
-                HorizontalOptions="Fill" />
+                FontSize="16"
+                HorizontalOptions="CenterAndExpand" />
 
             <Button 
                 Text="CONFIGURAR RECORDATORIO"
@@ -75,7 +78,8 @@
                 BackgroundColor="Red"
                 TextColor="White"
                 FontAttributes="Bold"
-                HorizontalOptions="Fill" />
+                FontSize="16"
+                HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </Grid>
 </ContentPage>

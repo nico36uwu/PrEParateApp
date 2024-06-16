@@ -19,9 +19,9 @@
             <Editor Text="{Binding Comentarios}" Placeholder="Mediacion registrada..."/>
 
             <Button Text="Guardar" Command="{Binding GuardarCommand}" 
-                    BackgroundColor="Red" TextColor="White" CornerRadius="20" HeightRequest="50"/>
+                    BackgroundColor="Red" TextColor="White" CornerRadius="20" HeightRequest="50" FontSize="14" FontAttributes="Bold"/>
             <Button Text="Volver" Command="{Binding VolverCommand}" 
-                    BackgroundColor="Red" TextColor="White" CornerRadius="20" HeightRequest="50"/>
+                    BackgroundColor="Red" TextColor="White" CornerRadius="20" HeightRequest="50" FontSize="14" FontAttributes="Bold"/>
         </VerticalStackLayout>
     </Border>
 
