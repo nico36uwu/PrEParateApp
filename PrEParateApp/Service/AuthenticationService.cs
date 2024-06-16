@@ -60,6 +60,8 @@ public class AuthenticationService
         _chatUsuario = null;
         _medicoUsuario = null;
         _usuarioConectado = null;
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
     }
 
     
