@@ -15,30 +15,31 @@
 
 
         <VerticalStackLayout Spacing="0" Margin="0,10,0,0">
-            <Label Text="FECHA DE NACIMIENTO" FontSize="Medium" Margin="0,0,0,0" TextColor="#3B3B3B3B"/>
+            <Label Text="FECHA DE NACIMIENTO" FontSize="Medium" Margin="0,0,0,0" TextColor="#3B3B3B3B" FontAttributes="Bold"/>
             <DatePicker x:Name="datePicker" Date="{Binding FechaNacimiento}" Margin="0,0,0,0"/>
         </VerticalStackLayout>
 
-        <Entry Placeholder="NOMBRE Y APELLIDOS" Text="{Binding NombreApellidos}" />
+        <Entry Placeholder="NOMBRE Y APELLIDOS" FontAttributes="Bold" Text="{Binding NombreApellidos}" />
 
-        <Entry Placeholder="DNI/NIE" Text="{Binding Dni}" />
+        <Entry Placeholder="DNI/NIE" FontAttributes="Bold" Text="{Binding Dni}" />
 
-        <Entry Placeholder="NÚMERO DE LA SEGURIDAD SOCIAL" Text="{Binding NumeroSS}" />
-        
-        <Entry Placeholder="NÚMERO DE LA TARJETA SANITARIA" Text="{Binding NumeroSIP}" />
+        <Entry Placeholder="NÚMERO DE LA SEGURIDAD SOCIAL" Text="{Binding NumeroSS}" FontAttributes="Bold" />
+
+        <Entry Placeholder="NÚMERO DE LA TARJETA SANITARIA" Text="{Binding NumeroSIP}" FontAttributes="Bold" />
 
         <Picker Title="MÉDICO" 
+                FontAttributes="Bold"
                 ItemsSource="{Binding MedicosDisponibles}"
                 ItemDisplayBinding="{Binding Nombre}"
                 SelectedItem="{Binding MedicoSeleccionado}" TitleColor="#B3B3B3B3" />
 
-        <Entry Placeholder="CONTRASEÑA (MÍNIMO 8 CARACTERES)" Text="{Binding Password}" IsPassword="True" />
-        
-        <Entry Placeholder="REPETIR CONTRASEÑA" Text="{Binding RepeatPassword}" IsPassword="True" />
+        <Entry Placeholder="CONTRASEÑA (MÍNIMO 8 CARACTERES)" Text="{Binding Password}" IsPassword="True" FontAttributes="Bold" />
+
+        <Entry Placeholder="REPETIR CONTRASEÑA" Text="{Binding RepeatPassword}" IsPassword="True" FontAttributes="Bold"/>
 
         <VerticalStackLayout Spacing="15" Padding="16">
-            <Button Text="Registrar Usuario" Command="{Binding RegisterCommand}" BackgroundColor="Red" TextColor="White" />
-            <Button Text="Volver" Command="{Binding VolverCommand}" BackgroundColor="Red" TextColor="White" />
+            <Button Text="Registrar Usuario" Command="{Binding RegisterCommand}" BackgroundColor="Red" TextColor="White" FontSize="16" FontAttributes="Bold"/>
+            <Button Text="Volver" Command="{Binding VolverCommand}" BackgroundColor="Red" TextColor="White" FontSize="16" FontAttributes="Bold"/>
         </VerticalStackLayout>
         
     </VerticalStackLayout>

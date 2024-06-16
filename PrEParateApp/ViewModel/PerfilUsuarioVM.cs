@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PrEParateApp.Model;
+using PrEParateApp.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,18 @@ namespace PrEParateApp.ViewModel
             _usuarioRepository = usuarioRepository;
             _usuario = authService.UsuarioConectado;
             _medico = authService.MedicoUsario;
+        }
+
+        [RelayCommand]
+        public async Task CerrarSesion()
+        {
+            bool confirm = await Application.Current.MainPage.DisplayAlert("Confirmación", "¿Estás seguro de que quieres cerrar sesión?", "Sí", "No");
+            if (confirm)
+            {
+                _authService.Logout();
+                // Navegar a la página de inicio de sesión
+                Application.Current.MainPage = MauiProgram.App.Services.GetService<LoginView>();
+            }
         }
 
         [RelayCommand]

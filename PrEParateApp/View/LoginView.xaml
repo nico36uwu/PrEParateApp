@@ -12,20 +12,28 @@
             HorizontalOptions="Fill">
 
             <Label Text="PrEParate" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" />
-            
-            <Image Source="icono_medicina.png" HeightRequest="100" HorizontalOptions="Center" />
-            
+
+            <Image Source="icono_medicina.png" HeightRequest="100" HorizontalOptions="Center" Margin="10,10,10,10"/>
+
             <Label 
-                Text="Inicio de sesión"
+                Text="INICIA SESIÓN"
                 FontSize="24"
                 FontAttributes="Bold"
                 HorizontalOptions="Center" />
 
+            <Label
+                Text="Introduce tu DNI/NIE y contraseña o regístrate para acceder a la aplicación"
+                FontSize="16"
+                HorizontalOptions="Center"
+                TextColor="Gray"
+                HorizontalTextAlignment="Center"/>
+
             <!-- Entrada para el DNI -->
             <Entry
                 x:Name="DniEntry"
+                FontAttributes="Bold"
                 Text="{Binding Dni}"
-                Placeholder="Introduce tu DNI/NIE"
+                Placeholder="DNI/NIE"
                 Keyboard="Text"
                 ReturnType="Next"
                 ClearButtonVisibility="WhileEditing"/>
@@ -33,23 +41,35 @@
             <!-- Entrada para la contraseña -->
             <Entry
                 x:Name="PasswordEntry"
+                FontAttributes="Bold"
                 Text="{Binding Password}"
-                Placeholder="Contraseña"
+                Placeholder="CONTRASEÑA"
                 IsPassword="True"
                 Keyboard="Text"
                 ReturnType="Done"
                 ClearButtonVisibility="WhileEditing"/>
 
             <!-- Botón para iniciar sesión -->
-            <Button
-                Text="Iniciar sesión"
+            <Button 
+                Text="INICIAR SESIÓN"
                 Command="{Binding LoginCommand}"
-                HorizontalOptions="Fill"/>
+                HorizontalOptions="Fill"
+                FontSize="16" FontAttributes="Bold"
+                BackgroundColor="Red"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50"
+                Margin="0,20,0,0"/>
 
             <Button
-                Text="Registrar Usuario"
+                Text="REGISTRAR USUARIO"
                 Command="{Binding RegisterCommand}"
-                HorizontalOptions="Fill"/>
+                HorizontalOptions="Fill"
+                FontSize="16" FontAttributes="Bold"
+                BackgroundColor="Red"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50"/>
 
         </VerticalStackLayout>
     </ScrollView>
