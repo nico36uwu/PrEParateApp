@@ -6,10 +6,12 @@
              Title="Calendario">
 
 
-    <Grid Padding="20">
+    <Grid Padding="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -18,55 +20,66 @@
         <BoxView Color="Red" Grid.Row="0" HeightRequest="50" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
         <Label Text="Calendario" FontSize="24" FontAttributes="Bold" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
 
+        <!-- Controles de navegación del mes -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Grid.Row="1" Spacing="15" Margin="0,20,0,0">
+            <Button Text="Anterior" Command="{Binding MesAnteriorCommand}" BackgroundColor="Red" TextColor="White"/>
+            <Label Text="{Binding DisplayMonth}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Button Text="Siguiente" Command="{Binding MesSiguienteCommand}" BackgroundColor="Red" TextColor="White"/>
+        </StackLayout>
+
         <!-- Calendario -->
-        <VerticalStackLayout Grid.Row="1">
-            <Label Text="{Binding DisplayMonth}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
-            <Grid x:Name="CalendarGrid" RowSpacing="5" ColumnSpacing="5" HorizontalOptions="Center">
-                <!-- Headers -->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="L" Grid.Column="0" HorizontalOptions="Center"/>
-                <Label Text="M" Grid.Column="1" HorizontalOptions="Center"/>
-                <Label Text="X" Grid.Column="2" HorizontalOptions="Center"/>
-                <Label Text="J" Grid.Column="3" HorizontalOptions="Center"/>
-                <Label Text="V" Grid.Column="4" HorizontalOptions="Center"/>
-                <Label Text="S" Grid.Column="5" HorizontalOptions="Center"/>
-                <Label Text="D" Grid.Column="6" HorizontalOptions="Center"/>
-            </Grid>
-        </VerticalStackLayout>
+        <Grid x:Name="CalendarGrid" Grid.Row="2" RowSpacing="15" ColumnSpacing="15" HorizontalOptions="Center" VerticalOptions="Center" Padding="10">
+            <!-- Headers -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Text="L" FontAttributes="Bold" FontSize="22" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="M" FontAttributes="Bold" FontSize="22" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="X" FontAttributes="Bold" FontSize="22" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="J" FontAttributes="Bold" FontSize="22" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="V" FontAttributes="Bold" FontSize="22" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="S" FontAttributes="Bold" FontSize="22" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="D" FontAttributes="Bold" FontSize="22" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
 
         <!-- Leyenda -->
-        <StackLayout Orientation="Horizontal" Grid.Row="2" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0">
-            <StackLayout Orientation="Horizontal" Spacing="10">
+        <StackLayout Orientation="Horizontal" Grid.Row="3" HorizontalOptions="CenterAndExpand" Spacing="15" Margin="0,0,0,30">
+            <StackLayout Orientation="Horizontal" Spacing="5">
                 <BoxView Color="Blue" WidthRequest="20" HeightRequest="20"/>
                 <Label Text="Hoy"/>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" Spacing="10">
+            <StackLayout Orientation="Horizontal" Spacing="5">
                 <BoxView Color="Green" WidthRequest="20" HeightRequest="20"/>
                 <Label Text="Toma medicación"/>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" Spacing="10">
+            <StackLayout Orientation="Horizontal" Spacing="5">
                 <BoxView Color="Red" WidthRequest="20" HeightRequest="20"/>
                 <Label Text="Evento especial"/>
             </StackLayout>
         </StackLayout>
 
+        <!-- Resumen del mes -->
+        <StackLayout Grid.Row="4" Spacing="10" Padding="10">
+            <Label Text="{Binding ResumenEventos}" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="{Binding ResumenTomasMedicacion}" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </StackLayout>
+
         <!-- Botón de planificación de evento -->
-        <Button Grid.Row="3" Text="PLANIFICAR NUEVO EVENTO" Command="{Binding PlanificarNuevoEventoCommand}" BackgroundColor="Red" TextColor="White" FontAttributes="Bold" HorizontalOptions="Fill" VerticalOptions="End"/>
+        <Button Grid.Row="5" Text="PLANIFICAR NUEVO EVENTO" Command="{Binding PlanificarNuevoEventoCommand}" BackgroundColor="Red" TextColor="White" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="10,20,10,20"/>
     </Grid>
 </ContentPage>

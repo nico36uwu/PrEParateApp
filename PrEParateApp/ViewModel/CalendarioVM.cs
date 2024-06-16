@@ -33,6 +33,12 @@ namespace PrEParateApp.ViewModel
         [ObservableProperty]
         private string displayMonth;
 
+        [ObservableProperty]
+        private string resumenEventos;
+
+        [ObservableProperty]
+        private string resumenTomasMedicacion;
+
         public ObservableCollection<Evento> Eventos { get; }
         public ObservableCollection<TomaMedicacion> TomasDeMedicacion { get; }
 
@@ -64,18 +70,34 @@ namespace PrEParateApp.ViewModel
                 TomasDeMedicacion.Add(toma);
             }
             CargarCalendario();
+            ActualizarResumen();
         }
 
         private void CargarCalendario()
         {
             // Limpiar el calendario
             CalendarGrid.Children.Clear();
-
+            CalendarGrid.HorizontalOptions = LayoutOptions.Center;
+            CalendarGrid.VerticalOptions = LayoutOptions.Center;
             // Añadir encabezados
             var headers = new string[] { "L", "M", "X", "J", "V", "S", "D" };
             for (int col = 0; col < 7; col++)
             {
-                var label = new Label { Text = headers[col], HorizontalOptions = LayoutOptions.Center };
+                var label = new Label
+                {
+                    Text = headers[col],
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center,
+                    FontSize = 25,
+                    FontAttributes = FontAttributes.Bold,
+                    Padding = new Microsoft.Maui.Thickness
+                    {
+                        Bottom = 10,
+                        Top = 0,
+                        Left = 0,
+                        Right = 0,
+                    }
+                };
                 CalendarGrid.Children.Add(label);
                 Grid.SetRow(label, 0);
                 Grid.SetColumn(label, col);
@@ -92,25 +114,46 @@ namespace PrEParateApp.ViewModel
             for (int day = 1; day <= daysInMonth; day++)
             {
                 var date = new DateTime(CurrentDate.Year, CurrentDate.Month, day);
-                var label = new Label { Text = day.ToString(), HorizontalOptions = LayoutOptions.Center };
+                var label = new Label
+                {
+                    Text = day.ToString(),
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center,
+                    FontSize = 22,
+                    BackgroundColor = Colors.Transparent,
+                    TextColor = Colors.Black
+                };
+
+                var dayContainer = new StackLayout
+                {
+                    Children = { label },
+                    HeightRequest = 35,
+                    WidthRequest = 35,
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center,
+                    BackgroundColor = Colors.Transparent
+                };
 
                 // Colorear el día según sea necesario
                 if (date == DateTime.Today)
                 {
-                    label.BackgroundColor = Colors.Blue;
+                    dayContainer.BackgroundColor = Colors.Blue;
+                    label.TextColor = Colors.White;
                 }
                 else if (TomasDeMedicacion.Any(t => t.Fecha.Date == date.Date))
                 {
-                    label.BackgroundColor = Colors.Green;
+                    dayContainer.BackgroundColor = Colors.Green;
+                    label.TextColor = Colors.White;
                 }
                 else if (Eventos.Any(e => e.Fecha.Date == date.Date))
                 {
-                    label.BackgroundColor = Colors.Red;
+                    dayContainer.BackgroundColor = Colors.Red;
+                    label.TextColor = Colors.White;
                 }
 
-                CalendarGrid.Children.Add(label);
-                Grid.SetRow(label, row);
-                Grid.SetColumn(label, (startDayOfWeek + day - 1) % 7);
+                CalendarGrid.Children.Add(dayContainer);
+                Grid.SetRow(dayContainer, row);
+                Grid.SetColumn(dayContainer, (startDayOfWeek + day - 1) % 7);
 
                 // Mover a la siguiente fila si es necesario
                 if ((startDayOfWeek + day) % 7 == 0)
@@ -120,12 +163,16 @@ namespace PrEParateApp.ViewModel
             }
         }
 
+
+
+
         [RelayCommand]
         public void MesAnterior()
         {
             CurrentDate = CurrentDate.AddMonths(-1);
             DisplayMonth = CurrentDate.ToString("MMMM yyyy", CultureInfo.CurrentCulture).ToUpper();
             CargarCalendario();
+            ActualizarResumen();
         }
 
         [RelayCommand]
@@ -134,6 +181,16 @@ namespace PrEParateApp.ViewModel
             CurrentDate = CurrentDate.AddMonths(1);
             DisplayMonth = CurrentDate.ToString("MMMM yyyy", CultureInfo.CurrentCulture).ToUpper();
             CargarCalendario();
+            ActualizarResumen();
+        }
+
+        private void ActualizarResumen()
+        {
+            var eventosMes = Eventos.Count(e => e.Fecha.Month == CurrentDate.Month && e.Fecha.Year == CurrentDate.Year);
+            var tomasMes = TomasDeMedicacion.Count(t => t.Fecha.Month == CurrentDate.Month && t.Fecha.Year == CurrentDate.Year);
+
+            ResumenEventos = $"Este mes tiene {eventosMes} eventos registrados";
+            ResumenTomasMedicacion = $"Este mes ha registrado {tomasMes} tomas de medicación";
         }
     }
 }
