@@ -77,7 +77,7 @@ public class RecordatorioService
             CategoryType = NotificationCategoryType.Reminder,
             Schedule = new NotificationRequestSchedule
             {
-                NotifyTime = DateTime.Now.AddSeconds(10) // Esto debe ser configurado según la hora y frecuencia seleccionada
+                NotifyTime = DateTime.Now.AddSeconds(10)
             }
         };
 

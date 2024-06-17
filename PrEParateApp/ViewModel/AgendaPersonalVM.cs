@@ -115,13 +115,15 @@ namespace PrEParateApp.ViewModel
         {
             if (TipoSeleccionado == Constantes.TOMA_MEDICACION)
             {
-                bool confirm = await Application.Current.MainPage.DisplayAlert("Confirmar", "¿Está seguro de eliminar esta toma de medicación?", "Sí", "No");
+                bool confirm = await Application.Current.MainPage.
+                    DisplayAlert("Confirmar", "¿Está seguro de eliminar esta toma de medicación?", "Sí", "No");
                 if (confirm)
                 {
                     var toma = await _tomaMedicacionService.ObtenerTomaPorId(item.Id);
                     if (toma != null)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Éxito", "Toma de medicación eliminada correctamente.", "OK");
+                        await Application.Current.MainPage.
+                            DisplayAlert("Éxito", "Toma de medicación eliminada correctamente.", "OK");
                         await _tomaMedicacionService.EliminarTomaMedicacion(toma);
                         Items.Remove(item);
                         CargarItemsPaginados();

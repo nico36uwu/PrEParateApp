@@ -38,7 +38,7 @@ public class AuthenticationService
                 await AsignarChatUsuario();
                 return Constantes.ACEPTADO;
             }
-            return user.EstadoPaciente; // PENDIENTE o RECHAZADO
+            return user.EstadoPaciente;
         }
         return Constantes.CREDENCIALES_INCORRECTAS;
     }

@@ -62,7 +62,6 @@ namespace PrEParateApp.ViewModel
             }
             catch (Exception ex)
             {
-                // Manejar cualquier excepción que pueda ocurrir durante el inicio de sesión
                 await ShowErrorMessage($"Error al iniciar sesión: {ex.Message}");
             }
         }
