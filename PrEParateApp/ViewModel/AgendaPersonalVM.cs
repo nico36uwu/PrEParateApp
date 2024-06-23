@@ -146,7 +146,7 @@ namespace PrEParateApp.ViewModel
                     Fecha = t.Fecha,
                     Descripcion = t.Comentarios,
                     Tipo = Constantes.TOMA_MEDICACION
-                }));
+                }).OrderByDescending(t => t.Fecha));
             }
             else if (TipoSeleccionado == Constantes.EVENTO)
             {
@@ -157,13 +157,13 @@ namespace PrEParateApp.ViewModel
                     Fecha = e.Fecha,
                     Descripcion = e.Nombre,
                     Tipo = Constantes.EVENTO
-                }));
+                }).OrderByDescending(e => e.Fecha));
             }
-
             Items = items;
             PaginaActual = 1;
             CargarItemsPaginados();
         }
+
 
 
         private void CargarItemsPaginados()
